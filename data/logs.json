@@ -1,0 +1,9 @@
+[
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250323_111228.jpg",
+    "timestamp": "2025-03-23T11:12:28.743105"
+  }
+]

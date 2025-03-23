@@ -1,0 +1,22 @@
+{
+  "admin_pin": "4321",
+  "blackout": {
+    "Monday": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "Sunday": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "theme_mode": "system"
+}

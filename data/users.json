@@ -1,0 +1,4 @@
+{
+    "12345678": { "name": "John Doe", "admin": true },
+    "87654321": { "name": "Jane Smith", "admin": false }
+}
