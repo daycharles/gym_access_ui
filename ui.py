@@ -1,6 +1,6 @@
 
 import tkinter as tk
-from tkinter import ttk, messagebox, simpledialog
+from tkinter import ttk, messagebox, simpledialog, PhotoImage
 from datetime import datetime
 from camera import get_mock_frame, take_mock_snapshot
 from storage import (
@@ -10,6 +10,7 @@ from storage import (
 )
 from wifi import load_wifi_config, save_wifi_config, write_to_wpa_supplicant, restart_wifi
 import subprocess
+from PIL import Image, ImageTk
 
 DAY_THEME = {
     "bg": "#ffffff",
@@ -49,7 +50,6 @@ def simulate_keypad(pin="1234"):
         print("[SIMULATED KEYPAD] Admin override successful.")
     else:
         print("[SIMULATED KEYPAD] Incorrect PIN entered.")
-
 
 def launch_system_keyboard():
     subprocess.Popen(["matchbox-keyboard"])
@@ -114,24 +114,44 @@ def run_ui():
     icon_frame = tk.Frame(home, bg=theme["bg"])
     icon_frame.pack(expand=True)
 
+    def load_and_resize_image(path, size):
+        img = Image.open(path)
+        img = img.resize(size, Image.LANCZOS)
+        return ImageTk.PhotoImage(img)
+
+    access_control_icon_dark = load_and_resize_image("assets/icons/access-control-dark.png", (50, 50))
+    access_control_icon_light = load_and_resize_image("assets/icons/access-control-light.png", (50, 50))
+    logs_icon_dark = load_and_resize_image("assets/icons/logs-dark.png", (50, 50))
+    logs_icon_light = load_and_resize_image("assets/icons/logs-light.png", (50, 50))
+    config_icon_dark = load_and_resize_image("assets/icons/settings-dark.png", (50, 50))
+    config_icon_light = load_and_resize_image("assets/icons/settings-light.png", (50, 50))
+    wifi_icon_dark = load_and_resize_image("assets/icons/wifi-dark.png", (50, 50))
+    wifi_icon_light = load_and_resize_image("assets/icons/wifi-light.png", (50, 50))
+    admin_icon_dark = load_and_resize_image("assets/icons/admin-dark.png", (50, 50))
+    admin_icon_light = load_and_resize_image("assets/icons/admin-light.png", (50, 50))
+    minimize_icon_dark = load_and_resize_image("assets/icons/minimize-dark.png", (50, 50))
+    minimize_icon_light = load_and_resize_image("assets/icons/minimize-light.png", (50, 50))
+
     icons = [
-        ("🚪", "Access", lambda: show_frame(frames["access"])),
-        ("📋", "Logs", lambda: show_frame(frames["logs"])),
-        ("⚙️", "Config", lambda: show_frame(frames["config"])),
-        ("📶", "Wi-Fi", lambda: show_frame(frames["wifi"])),
-        ("👤", "Admin", lambda: show_frame(frames["admin"])),
-        ("🔲", "Minimize", minimize_app)
+        (access_control_icon_dark, "Access", lambda: show_frame(frames["access"])),
+        (logs_icon_dark, "Logs", lambda: show_frame(frames["logs"])),
+        (config_icon_dark, "Config", lambda: show_frame(frames["config"])),
+        (wifi_icon_dark, "Wi-Fi", lambda: show_frame(frames["wifi"])),
+        (admin_icon_dark, "Admin", lambda: show_frame(frames["admin"])),
+        (minimize_icon_light, "Minimize", minimize_app)
     ]
+
 
     for i, (icon, label, cmd) in enumerate(icons):
         row = i // 3
         col = i % 3
         cell = tk.Frame(icon_frame, bg=theme["bg"])
         cell.grid(row=row, column=col, padx=40, pady=20)
-        lbl = tk.Label(cell, text=icon, font=("Arial", 48), cursor="hand2", bg=theme["bg"], fg=theme["fg"])
+        lbl = tk.Label(cell, text=label, image=icon, font=("Arial", 10), cursor="hand2", bg=theme["bg"], fg=theme["fg"])
         lbl.pack()
         lbl.bind("<Button-1>", lambda e, f=cmd: f())
         tk.Label(cell, text=label, font=("Arial", 14), bg=theme["bg"], fg=theme["fg"]).pack()
+
 
     # Access Panel
     access = frames["access"]
