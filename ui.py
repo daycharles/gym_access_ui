@@ -9,6 +9,7 @@ from storage import (
     is_blackout
 )
 from wifi import load_wifi_config, save_wifi_config, write_to_wpa_supplicant, restart_wifi
+import subprocess
 
 DAY_THEME = {
     "bg": "#ffffff",
@@ -26,60 +27,32 @@ NIGHT_THEME = {
 
 theme_mode = None
 theme = {}
-keyboard_window = None
+
+def simulate_scan(uid="12345678"):
+    from camera import get_mock_frame, take_mock_snapshot
+    from storage import load_users, log_access, is_blackout, load_config
+    config = load_config()
+    users = load_users()
+    frame_img = get_mock_frame()
+    snapshot_path = take_mock_snapshot(uid, frame_img)
+    status = "granted" if uid in users else "denied"
+    name = users.get(uid, {}).get("name", "Unknown")
+    if is_blackout(config) and not users.get(uid, {}).get("admin", False):
+        status = "denied (blackout)"
+    log_access(uid, name, status, snapshot_path)
+    print(f"[SIMULATED RFID] UID: {uid}, Name: {name}, Status: {status}")
+
+def simulate_keypad(pin="1234"):
+    from storage import load_config
+    config = load_config()
+    if pin == config.get("admin_pin"):
+        print("[SIMULATED KEYPAD] Admin override successful.")
+    else:
+        print("[SIMULATED KEYPAD] Incorrect PIN entered.")
 
 
-keyboard_window = None  # global reference
-
-def launch_keyboard(entry_widget):
-    global keyboard_window
-
-    if keyboard_window and keyboard_window.winfo_exists():
-        keyboard_window.lift()
-        return
-
-    keyboard_window = tk.Toplevel()
-    keyboard_window.title("On-Screen Keyboard")
-    keyboard_window.configure(bg="black")
-    keyboard_window.geometry("600x250")
-    keyboard_window.resizable(False, False)
-
-    def close_keyboard():
-        global keyboard_window
-        if keyboard_window:
-            keyboard_window.destroy()
-            keyboard_window = None
-
-    keyboard_window.protocol("WM_DELETE_WINDOW", close_keyboard)
-
-    keys = [
-        ['1','2','3','4','5','6','7','8','9','0','Back'],
-        ['q','w','e','r','t','y','u','i','o','p'],
-        ['a','s','d','f','g','h','j','k','l'],
-        ['z','x','c','v','b','n','m','.','@'],
-        ['Space', 'Clear', 'Enter']
-    ]
-
-    def insert_text(char):
-        if char == 'Back':
-            entry_widget.delete(len(entry_widget.get()) - 1, tk.END)
-        elif char == 'Space':
-            entry_widget.insert(tk.END, ' ')
-        elif char == 'Clear':
-            entry_widget.delete(0, tk.END)
-        elif char == 'Enter':
-            close_keyboard()
-        else:
-            entry_widget.insert(tk.END, char)
-
-    for row in keys:
-        row_frame = tk.Frame(keyboard_window, bg="black")
-        row_frame.pack(pady=2)
-        for key in row:
-            b = tk.Button(row_frame, text=key, width=6, height=2, font=('Arial', 12),
-                          bg="#444", fg="white", activebackground="#666",
-                          command=lambda c=key: insert_text(c))
-            b.pack(side="left", padx=2)
+def launch_system_keyboard():
+    subprocess.Popen(["matchbox-keyboard"])
 
 def determine_theme(mode):
     hour = datetime.now().hour
@@ -115,12 +88,8 @@ def run_ui():
             messagebox.showerror("Access Denied", "Invalid PIN.")
 
     def minimize_app():
-        pin = simpledialog.askstring("Minimize App", "Enter Admin PIN:", show="*")
-        if pin == config.get("admin_pin"):
-            root.attributes("-fullscreen", False)
-            root.iconify()
-        else:
-            messagebox.showerror("Access Denied", "Invalid PIN.")
+        root.attributes("-fullscreen", False)
+        root.iconify()
 
     # Frames
     frames = {}
@@ -307,7 +276,7 @@ def run_ui():
     admin_content = tk.Frame(admin_tab, bg=theme["bg"])
     admin_content.place(relx=0.5, rely=0.5, anchor="center")
 
-    tk.Label(admin_content, text="🕒 Blackout Schedule", font=("Helvetica", 24),
+    tk.Label(admin_content, text="🕒 Blackout Schedule", font=("Helvetica", 20),
              bg=theme["bg"], fg=theme["fg"]).pack(pady=(10, 20))
 
     day_widgets = {}
@@ -316,17 +285,17 @@ def run_ui():
         row = tk.Frame(admin_content, bg=theme["bg"])
         row.pack(pady=5)
 
-        tk.Label(row, text=day, font=("Arial", 24, "bold"), width=5,
+        tk.Label(row, text=day, font=("Arial", 16, "bold"), width=5,
                  bg=theme["bg"], fg=theme["fg"]).pack(side="left", padx=(0, 10))
 
         start_var = tk.StringVar()
         end_var = tk.StringVar()
         all_day_var = tk.BooleanVar()
 
-        start_dropdown = ttk.Combobox(row, textvariable=start_var, font=("Arial", 20), values=hours, width=6, state="readonly")
-        end_dropdown = ttk.Combobox(row, textvariable=end_var, font=("Arial", 20), values=hours, width=6, state="readonly")
+        start_dropdown = ttk.Combobox(row, textvariable=start_var, font=("Arial", 16), values=hours, width=6, state="readonly")
+        end_dropdown = ttk.Combobox(row, textvariable=end_var, font=("Arial", 16), values=hours, width=6, state="readonly")
         start_dropdown.pack(side="left", padx=5)
-        tk.Label(row, text="→", font=("Arial", 20), bg=theme["bg"], fg=theme["fg"]).pack(side="left")
+        tk.Label(row, text="→", font=("Arial", 16), bg=theme["bg"], fg=theme["fg"]).pack(side="left")
         end_dropdown.pack(side="left", padx=5)
 
         def toggle_disable(s=start_dropdown, e=end_dropdown, v=all_day_var):
@@ -334,7 +303,7 @@ def run_ui():
             s.configure(state=state)
             e.configure(state=state)
 
-        all_day_chk = tk.Checkbutton(row, text="All Day", font=("Arial", 20), variable=all_day_var,
+        all_day_chk = tk.Checkbutton(row, text="All Day", font=("Arial", 16), variable=all_day_var,
                                      command=lambda s=start_dropdown, e=end_dropdown, v=all_day_var: toggle_disable(s,
                                                                                                                     e,
                                                                                                                     v),
