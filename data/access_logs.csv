@@ -1,0 +1,4 @@
+timestamp,uid,name,status,snapshot
+2025-03-23T11:12:28.743105,12345678,John Doe,granted,assets/snapshots\12345678_20250323_111228.jpg
+2025-03-23T14:54:50.403033,12345678,John Doe,granted,assets/snapshots\12345678_20250323_145450.jpg
+2025-03-23T15:07:01.767660,12345678,John Doe,granted,assets/snapshots\12345678_20250323_150701.jpg

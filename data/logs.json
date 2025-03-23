@@ -40,5 +40,12 @@
     "status": "granted",
     "snapshot": "assets/snapshots\\12345678_20250323_155727.jpg",
     "timestamp": "2025-03-23T15:57:27.601433"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250323_174631.jpg",
+    "timestamp": "2025-03-23T17:46:31.749861"
   }
 ]

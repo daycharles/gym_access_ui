@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="autostart configuration">
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="Added styling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/gym-access.desktop[Desktop Entry].desktop[Desktop Entry].desktop[Desktop Entry]" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/logs.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/logs.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
@@ -125,7 +123,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742752406565</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added styling">
+      <option name="closed" value="true" />
+      <created>1742764318143</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742764318143</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -143,6 +149,7 @@
     <MESSAGE value="InitialCommit" />
     <MESSAGE value="Added a wifi tab for wifi connection" />
     <MESSAGE value="autostart configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="autostart configuration" />
+    <MESSAGE value="Added styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added styling" />
   </component>
 </project>

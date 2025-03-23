@@ -9,6 +9,7 @@ from storage import (
     is_blackout
 )
 from wifi import load_wifi_config, save_wifi_config, write_to_wpa_supplicant, restart_wifi
+from PIL import Image, ImageTk
 
 DAY_THEME = {
     "bg": "#ffffff",
@@ -26,6 +27,60 @@ NIGHT_THEME = {
 
 theme_mode = None
 theme = {}
+keyboard_window = None
+
+
+keyboard_window = None  # global reference
+
+def launch_keyboard(entry_widget):
+    global keyboard_window
+
+    if keyboard_window and keyboard_window.winfo_exists():
+        keyboard_window.lift()
+        return
+
+    keyboard_window = tk.Toplevel()
+    keyboard_window.title("On-Screen Keyboard")
+    keyboard_window.configure(bg="black")
+    keyboard_window.geometry("600x250")
+    keyboard_window.resizable(False, False)
+
+    def close_keyboard():
+        global keyboard_window
+        if keyboard_window:
+            keyboard_window.destroy()
+            keyboard_window = None
+
+    keyboard_window.protocol("WM_DELETE_WINDOW", close_keyboard)
+
+    keys = [
+        ['1','2','3','4','5','6','7','8','9','0','Back'],
+        ['q','w','e','r','t','y','u','i','o','p'],
+        ['a','s','d','f','g','h','j','k','l'],
+        ['z','x','c','v','b','n','m','.','@'],
+        ['Space', 'Clear', 'Enter']
+    ]
+
+    def insert_text(char):
+        if char == 'Back':
+            entry_widget.delete(len(entry_widget.get()) - 1, tk.END)
+        elif char == 'Space':
+            entry_widget.insert(tk.END, ' ')
+        elif char == 'Clear':
+            entry_widget.delete(0, tk.END)
+        elif char == 'Enter':
+            close_keyboard()
+        else:
+            entry_widget.insert(tk.END, char)
+
+    for row in keys:
+        row_frame = tk.Frame(keyboard_window, bg="black")
+        row_frame.pack(pady=2)
+        for key in row:
+            b = tk.Button(row_frame, text=key, width=6, height=2, font=('Arial', 12),
+                          bg="#444", fg="white", activebackground="#666",
+                          command=lambda c=key: insert_text(c))
+            b.pack(side="left", padx=2)
 
 def determine_theme(mode):
     hour = datetime.now().hour
@@ -72,8 +127,17 @@ def run_ui():
     frames = {}
     for name in ["home", "access", "logs", "config", "wifi", "admin"]:
         frame = tk.Frame(root, bg=theme["bg"])
-        frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+        frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=1, relheight=1)
         frames[name] = frame
+        clock_label = tk.Label(frame, font=("Arial", 14), fg=theme["fg"], bg=theme["bg"])
+        clock_label.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
+
+        def update_clock():
+            now = datetime.now().strftime("%m-%d-%Y %H:%M")
+            clock_label.config(text=now)
+            clock_label.after(1000, update_clock)
+
+        update_clock()
 
     # Home Icon Grid
     home = frames["home"]
@@ -106,8 +170,32 @@ def run_ui():
     tk.Label(access, text="Access Panel", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
 
     # Camera feed (mock)
-    frame = tk.Label(access, text="Camera Feed Here", bg="black", fg="white", width=60, height=15)
-    frame.pack(pady=10)
+    # Load a sample image once
+    image_path = "./assets/camera_feed.jpg"
+    frame_label = tk.Label(access, bg="black")
+    frame_label.pack(pady=10)
+
+    import os
+
+    def update_mock_feed():
+        try:
+            if not os.path.exists(image_path):
+                raise FileNotFoundError(f"Image file not found at path: {image_path}")
+
+            img = Image.open(image_path)
+            img = img.resize((480, 270))  # Resize to fit nicely in the UI
+            tk_img = ImageTk.PhotoImage(img)
+            frame_label.config(image=tk_img)
+            frame_label.image = tk_img  # Keep reference to avoid GC
+        except FileNotFoundError as fnf_error:
+            frame_label.config(text=str(fnf_error), fg="white")
+        except IOError as io_error:
+            frame_label.config(text=f"Failed to load image: {io_error}", fg="white")
+
+        # Schedule the next update every 2 seconds
+        frame_label.after(2000, update_mock_feed)
+
+    update_mock_feed()
 
     def make_label_button(parent, text, command):
         new_lbl = tk.Label(parent, text=text, font=("Arial", 20, "bold"),
@@ -167,10 +255,16 @@ def run_ui():
     config_tab = frames["config"]
     tk.Label(config_tab, text="Config Editor", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
 
-    tk.Label(config_tab, text="Admin PIN:", bg=theme["bg"], fg=theme["fg"]).pack()
-    admin_pin_entry = tk.Entry(config_tab, show="*", bg=theme["accent"], fg=theme["fg"])
+    tk.Label(config_tab, text="Admin PIN:", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack()
+    admin_pin_entry = tk.Entry(config_tab, show="*", font=("Helvetica", 24), bg=theme["accent"], fg=theme["fg"])
     admin_pin_entry.insert(0, config.get("admin_pin", ""))
     admin_pin_entry.pack()
+
+    # Add a label to launch keyboard next to it
+    keyboard_label = tk.Label(config_tab, text="🧠 Keyboard", font=("Arial", 12, "bold"),
+                              bg=theme["bg"], fg=theme["fg"], cursor="hand2")
+    keyboard_label.pack(pady=5)
+    keyboard_label.bind("<Button-1>", lambda e: launch_keyboard(admin_pin_entry))
 
     def save_cfg():
         config["admin_pin"] = admin_pin_entry.get()
@@ -188,6 +282,9 @@ def run_ui():
     wifi_config = load_wifi_config()
     tk.Label(wifi, text="Wi-Fi Settings", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
 
+    wifi_content = tk.Frame(wifi, bg=theme["bg"])
+    wifi_content.place(relx=0.5, rely=0.5, anchor="center")
+
     tk.Label(wifi, text="Current SSID:", bg=theme["bg"], fg=theme["fg"]).pack()
     current_ssid_label = tk.Label(wifi, text=wifi_config.get("ssid", ""), font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"])
     current_ssid_label.pack()
@@ -201,6 +298,12 @@ def run_ui():
     password_entry = tk.Entry(wifi,  font=("Helvetica", 20), bg=theme["accent"], fg=theme["fg"])
     password_entry.insert(0, wifi_config.get("password", ""))
     password_entry.pack()
+
+    # Add a label to launch keyboard next to it
+    keyboard_label = tk.Label(wifi, text="🧠 Keyboard", font=("Arial", 12, "bold"),
+                              bg=theme["bg"], fg=theme["fg"], cursor="hand2")
+    keyboard_label.pack(pady=5)
+    keyboard_label.bind("<Button-1>", lambda e: launch_keyboard(wifi))
 
     def update_wifi():
         ssid = ssid_entry.get().strip()
@@ -292,6 +395,11 @@ def run_ui():
     footer.pack(pady=20)
     make_label_button(footer, "💾", save_blackout)
     make_label_button(footer, "⬅", lambda: show_frame(home))
+    # Add a label to launch keyboard next to it
+    keyboard_label = tk.Label(admin_content, text="🧠 Keyboard", font=("Arial", 12, "bold"),
+                              bg=theme["bg"], fg=theme["fg"], cursor="hand2")
+    keyboard_label.pack(pady=5)
+    keyboard_label.bind("<Button-1>", lambda e: launch_keyboard(entry))
 
     show_frame(home)
     root.mainloop()
