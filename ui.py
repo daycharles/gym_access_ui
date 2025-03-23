@@ -9,7 +9,6 @@ from storage import (
     is_blackout
 )
 from wifi import load_wifi_config, save_wifi_config, write_to_wpa_supplicant, restart_wifi
-from PIL import Image, ImageTk
 
 DAY_THEME = {
     "bg": "#ffffff",
@@ -170,33 +169,10 @@ def run_ui():
     tk.Label(access, text="Access Panel", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
 
     # Camera feed (mock)
-    # Load a sample image once
-    image_path = "./assets/camera_feed.jpg"
-    frame_label = tk.Label(access, bg="black")
-    frame_label.pack(pady=10)
 
-    import os
-
-    def update_mock_feed():
-        try:
-            if not os.path.exists(image_path):
-                raise FileNotFoundError(f"Image file not found at path: {image_path}")
-
-            img = Image.open(image_path)
-            img = img.resize((480, 270))  # Resize to fit nicely in the UI
-            tk_img = ImageTk.PhotoImage(img)
-            frame_label.config(image=tk_img)
-            frame_label.image = tk_img  # Keep reference to avoid GC
-        except FileNotFoundError as fnf_error:
-            frame_label.config(text=str(fnf_error), fg="white")
-        except IOError as io_error:
-            frame_label.config(text=f"Failed to load image: {io_error}", fg="white")
-
-        # Schedule the next update every 2 seconds
-        frame_label.after(2000, update_mock_feed)
-
-    update_mock_feed()
-
+    # Camera feed (mock)
+    frame = tk.Label(access, text="Camera Feed Here", bg="black", fg="white", width=60, height=15)
+    frame.pack(pady=10)
     def make_label_button(parent, text, command):
         new_lbl = tk.Label(parent, text=text, font=("Arial", 20, "bold"),
                           fg=theme["fg"], bg=theme["bg"], cursor="hand2", width=12)
@@ -285,8 +261,8 @@ def run_ui():
     wifi_content = tk.Frame(wifi, bg=theme["bg"])
     wifi_content.place(relx=0.5, rely=0.5, anchor="center")
 
-    tk.Label(wifi, text="Current SSID:", bg=theme["bg"], fg=theme["fg"]).pack()
-    current_ssid_label = tk.Label(wifi, text=wifi_config.get("ssid", ""), font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"])
+    tk.Label(wifi, text="Current SSID:", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack()
+    current_ssid_label = tk.Label(wifi, text=wifi_config.get("ssid", ""), font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"])
     current_ssid_label.pack()
 
     tk.Label(wifi, text="SSID:", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack()
