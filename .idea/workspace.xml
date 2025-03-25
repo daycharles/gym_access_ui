@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="workspace xml">
-      <change afterPath="$PROJECT_DIR$/assets/icons/Gatewise-logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/Gatewise-thumbnail.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/back-dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/back-light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/export-dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/export-light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/refresh-dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/refresh-light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/save-dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/save-light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/scan-dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/scan-light.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/minimize-dark.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/icons/minimize-dark.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/minimize-light.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/icons/minimize-light.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/logs.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/logs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
-    </list>
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="added more icons and theme settings" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -191,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742852476367</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added more icons and theme settings">
+      <option name="closed" value="true" />
+      <created>1742899231311</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1742899231311</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -215,6 +204,7 @@
     <MESSAGE value="Removed admin password for minimize" />
     <MESSAGE value="added icons for UI" />
     <MESSAGE value="workspace xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace xml" />
+    <MESSAGE value="added more icons and theme settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="added more icons and theme settings" />
   </component>
 </project>
