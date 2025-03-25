@@ -47,5 +47,33 @@
     "status": "granted",
     "snapshot": "assets/snapshots\\12345678_20250323_174631.jpg",
     "timestamp": "2025-03-23T17:46:31.749861"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250324_180721.jpg",
+    "timestamp": "2025-03-24T18:07:21.186389"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250324_181527.jpg",
+    "timestamp": "2025-03-24T18:15:27.623648"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250324_195101.jpg",
+    "timestamp": "2025-03-24T19:51:01.458047"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250325_063401.jpg",
+    "timestamp": "2025-03-25T06:34:01.833513"
   }
 ]
