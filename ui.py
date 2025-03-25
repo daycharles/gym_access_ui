@@ -80,11 +80,11 @@ def run_ui():
 
     # Load Icons
     icons = {
-        "access": load_and_resize_image("assets/icons/access-control-dark.png", (50, 50)),
-        "logs": load_and_resize_image("assets/icons/logs-dark.png", (50, 50)),
-        "config": load_and_resize_image("assets/icons/settings-dark.png", (50, 50)),
-        "wifi": load_and_resize_image("assets/icons/wifi-dark.png", (50, 50)),
-        "admin": load_and_resize_image("assets/icons/admin-dark.png", (50, 50)),
+        "access": load_and_resize_image("assets/icons/access-control-dark.png", (100, 100)),
+        "logs": load_and_resize_image("assets/icons/logs-dark.png", (100, 100)),
+        "config": load_and_resize_image("assets/icons/settings-dark.png", (100, 100)),
+        "wifi": load_and_resize_image("assets/icons/wifi-dark.png", (100, 100)),
+        "admin": load_and_resize_image("assets/icons/admin-dark.png", (100, 100)),
         "minimize": load_and_resize_image("assets/icons/minimize-dark.png", (50, 50)),
         "refresh": load_and_resize_image("assets/icons/refresh-light.png", (50, 50)),
         "export": load_and_resize_image("assets/icons/export-dark.png", (50, 50)),
