@@ -19,6 +19,7 @@ NIGHT_THEME = {"bg": "#294856", "fg": "#000000", "accent": "#3a3a3a", "button": 
 
 theme_mode = None
 theme = {}
+is_minimized = False
 
 def determine_theme(mode):
     hour = datetime.now().hour
@@ -66,7 +67,7 @@ def make_label_button(parent, text, command, image=None):
     return lbl
 
 def run_ui():
-    global theme, theme_mode
+    global theme, theme_mode, Minimize
     users = load_users()
     config = load_config()
     theme_mode = config.get("theme_mode", "system")
@@ -80,12 +81,13 @@ def run_ui():
 
     # Load Icons
     icons = {
-        "access": load_and_resize_image("assets/icons/access-control-dark.png", (100, 100)),
-        "logs": load_and_resize_image("assets/icons/logs-dark.png", (100, 100)),
-        "config": load_and_resize_image("assets/icons/settings-dark.png", (100, 100)),
-        "wifi": load_and_resize_image("assets/icons/wifi-dark.png", (100, 100)),
-        "admin": load_and_resize_image("assets/icons/admin-dark.png", (100, 100)),
-        "minimize": load_and_resize_image("assets/icons/minimize-dark.png", (50, 50)),
+        "access": load_and_resize_image("assets/icons/access-control-dark.png", (80, 80)),
+        "logs": load_and_resize_image("assets/icons/logs-dark.png", (80, 80)),
+        "config": load_and_resize_image("assets/icons/settings-dark.png", (80, 80)),
+        "wifi": load_and_resize_image("assets/icons/wifi-dark.png", (80, 80)),
+        "admin": load_and_resize_image("assets/icons/admin-dark.png", (80, 80)),
+        "minimize": load_and_resize_image("assets/icons/minimize.png", (80, 80)),
+        "maximize": load_and_resize_image("assets/icons/maximize.png", (80, 80)),
         "refresh": load_and_resize_image("assets/icons/refresh-light.png", (50, 50)),
         "export": load_and_resize_image("assets/icons/export-dark.png", (50, 50)),
         "save": load_and_resize_image("assets/icons/save-dark.png", (50, 50)),
@@ -113,8 +115,24 @@ def run_ui():
         f.tkraise()
 
     def minimize_app():
+        global is_minimized
         root.attributes("-fullscreen", False)
         root.iconify()
+        is_minimized = True
+        minimize_btn.config(image=icons["maximize"], text = "Maximize")
+
+    def maximize_app():
+        global is_minimized
+        root.deiconify()
+        root.attributes("-fullscreen", True)
+        is_minimized = False
+        minimize_btn.config(image=icons["minimize"], text = "Minimize")
+
+    def toggle_minimize_maximize():
+        if is_minimized:
+            maximize_app()
+        else:
+            minimize_app()
 
     def simulate_scan(uid="12345678"):
         frame_img = get_mock_frame()
@@ -140,13 +158,17 @@ def run_ui():
         ("Config", lambda: show_frame(frames["config"]), icons["config"]),
         ("Wi-Fi", lambda: show_frame(frames["wifi"]), icons["wifi"]),
         ("Admin", lambda: show_frame(frames["admin"]), icons["admin"]),
-        ("Minimize", minimize_app, icons["minimize"]),
+        ("Minimize", toggle_minimize_maximize, icons["minimize"]),
     ]
 
     for i, (label, cmd, icon) in enumerate(home_buttons):
         cell = tk.Frame(icon_frame, bg=theme["bg"])
-        cell.grid(row=i//3, column=i%3, padx=40, pady=20)
-        make_label_button(cell, label, cmd, image=icon)
+        cell.grid(row=i // 3, column=i % 3, padx=40, pady=20)
+        if label == "Minimize":
+            global minimize_btn
+            minimize_btn = make_label_button(cell, label, cmd, image=icon)
+        else:
+            make_label_button(cell, label, cmd, image=icon)
 
     # Access Panel
     access = frames["access"]
