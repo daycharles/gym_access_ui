@@ -15,7 +15,7 @@ from wifi import load_wifi_config, save_wifi_config, write_to_wpa_supplicant, re
 
 # Theme Definitions
 DAY_THEME = {"bg": "#ffffff", "fg": "#000000", "accent": "#dddddd", "button": "#f0f0f0"}
-NIGHT_THEME = {"bg": "#294856", "fg": "#000000", "accent": "#3a3a3a", "button": "#2d2d2d"}
+NIGHT_THEME = {"bg": "#294856", "fg": "#ffffff", "accent": "#3a3a3a", "button": "#2d2d2d"}
 
 theme_mode = None
 theme = {}
@@ -88,12 +88,11 @@ def run_ui():
         "admin": load_and_resize_image("assets/icons/admin_white.png", (80, 80)),
         "minimize": load_and_resize_image("assets/icons/minimize_white.png", (80, 80)),
         "maximize": load_and_resize_image("assets/icons/maximize_white.png", (80, 80)),
-        "refresh": load_and_resize_image("assets/icons/refresh-light.png", (50, 50)),
-        "export": load_and_resize_image("assets/icons/export-dark.png", (50, 50)),
-        "save": load_and_resize_image("assets/icons/save-dark.png", (50, 50)),
-        "back": load_and_resize_image("assets/icons/back-dark.png", (50, 50)),
-        "scan": load_and_resize_image("assets/icons/scan-dark.png", (70, 70)),
-        "logo": load_and_resize_image("assets/icons/Gatewise.PNG", (80, 80)),
+        "refresh": load_and_resize_image("assets/icons/refresh_white.png", (50, 50)),
+        "export": load_and_resize_image("assets/icons/export_white.png", (50, 50)),
+        "save": load_and_resize_image("assets/icons/save_white.png", (50, 50)),
+        "back": load_and_resize_image("assets/icons/back_white.png", (50, 50)),
+        "logo": load_and_resize_image("assets/icons/Gatewise.PNG", (100, 100)),
     }
 
     # Page container
