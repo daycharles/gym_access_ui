@@ -146,7 +146,7 @@ def run_ui():
 
     # Home screen
     home = frames["home"]
-    tk.Label(home, text="GateWise", font=("Helvetica", 28, "bold"), bg=theme["bg"], fg=theme["fg"]).pack(pady=(20, 10))
+    tk.Label(home, text="", font=("Helvetica", 28, "bold"), bg=theme["bg"], fg=theme["fg"]).pack(pady=(20, 10))
     tk.Label(home, image=icons["logo"], bg=theme["bg"]).pack()
 
     icon_frame = tk.Frame(home, bg=theme["bg"])
