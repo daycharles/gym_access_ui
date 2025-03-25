@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update home screen label and adjust workspace settings" />
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update home screen to display live feed and adjust icon references">
+      <change afterPath="$PROJECT_DIR$/assets/icons/admin_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/config_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/live_feed_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/logs-white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/maximize_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/minimize_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/wifi_white.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -228,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742906158956</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="refactor: update home screen to display live feed and adjust icon references">
+      <option name="closed" value="true" />
+      <created>1742906960819</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1742906960819</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -259,7 +277,8 @@
     <MESSAGE value="refactor: remove unused global variable and update workspace settings" />
     <MESSAGE value="refactor: update logo image size and adjust workspace settings" />
     <MESSAGE value="refactor: update home screen label and adjust workspace settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update home screen label and adjust workspace settings" />
+    <MESSAGE value="refactor: update home screen to display live feed and adjust icon references" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update home screen to display live feed and adjust icon references" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

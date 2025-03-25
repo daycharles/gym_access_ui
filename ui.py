@@ -58,8 +58,8 @@ def launch_keyboard(widget=None):
     subprocess.Popen(["matchbox-keyboard"])
 
 def make_label_button(parent, text, command, image=None):
-    lbl = tk.Label(parent, text=text, image=image, font=("Arial", 12),
-                   fg=theme["fg"], bg=theme["bg"], cursor="hand2", compound="top", width=80)
+    lbl = tk.Label(parent, text=text, image=image, font=("Arial", 16),  # Increased font size to 16
+                   fg=theme["fg"], bg=theme["bg"], cursor="hand2", padx=10, pady= 10, compound="top", width=90)
     lbl.bind("<Button-1>", lambda e: command())
     lbl.bind("<Enter>", lambda e: lbl.config(bg=theme["accent"]))
     lbl.bind("<Leave>", lambda e: lbl.config(bg=theme["bg"]))
@@ -81,13 +81,13 @@ def run_ui():
 
     # Load Icons
     icons = {
-        "feed": load_and_resize_image("assets/icons/live_feed.png", (80, 80)),
-        "logs": load_and_resize_image("assets/icons/logs-dark.png", (80, 80)),
-        "config": load_and_resize_image("assets/icons/settings-dark.png", (80, 80)),
-        "wifi": load_and_resize_image("assets/icons/wifi-dark.png", (80, 80)),
-        "admin": load_and_resize_image("assets/icons/admin-dark.png", (80, 80)),
-        "minimize": load_and_resize_image("assets/icons/minimize.png", (80, 80)),
-        "maximize": load_and_resize_image("assets/icons/maximize.png", (80, 80)),
+        "feed": load_and_resize_image("assets/icons/live_feed_white.png", (80, 80)),
+        "logs": load_and_resize_image("assets/icons/logs-white.png", (80, 80)),
+        "config": load_and_resize_image("assets/icons/config_white.png", (80, 80)),
+        "wifi": load_and_resize_image("assets/icons/wifi_white.png", (80, 80)),
+        "admin": load_and_resize_image("assets/icons/admin_white.png", (80, 80)),
+        "minimize": load_and_resize_image("assets/icons/minimize_white.png", (80, 80)),
+        "maximize": load_and_resize_image("assets/icons/maximize_white.png", (80, 80)),
         "refresh": load_and_resize_image("assets/icons/refresh-light.png", (50, 50)),
         "export": load_and_resize_image("assets/icons/export-dark.png", (50, 50)),
         "save": load_and_resize_image("assets/icons/save-dark.png", (50, 50)),
@@ -146,8 +146,7 @@ def run_ui():
 
     # Home screen
     home = frames["home"]
-    tk.Label(home, text="", font=("Helvetica", 28, "bold"), bg=theme["bg"], fg=theme["fg"]).pack(pady=(20, 10))
-    tk.Label(home, image=icons["logo"], bg=theme["bg"]).pack()
+    tk.Label(home, image=icons["logo"], bg=theme["bg"]).pack(pady=20)
 
     icon_frame = tk.Frame(home, bg=theme["bg"])
     icon_frame.pack(pady=30)
