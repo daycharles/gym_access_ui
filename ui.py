@@ -81,7 +81,7 @@ def run_ui():
 
     # Load Icons
     icons = {
-        "access": load_and_resize_image("assets/icons/access-control-dark.png", (80, 80)),
+        "feed": load_and_resize_image("assets/icons/live_feed.png", (80, 80)),
         "logs": load_and_resize_image("assets/icons/logs-dark.png", (80, 80)),
         "config": load_and_resize_image("assets/icons/settings-dark.png", (80, 80)),
         "wifi": load_and_resize_image("assets/icons/wifi-dark.png", (80, 80)),
@@ -98,7 +98,7 @@ def run_ui():
 
     # Page container
     frames = {}
-    for name in ["home", "access", "logs", "config", "wifi", "admin"]:
+    for name in ["home", "feed", "logs", "config", "wifi", "admin"]:
         frame = tk.Frame(root, bg=theme["bg"])
         frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=1, relheight=1)
         frames[name] = frame
@@ -153,7 +153,7 @@ def run_ui():
     icon_frame.pack(pady=30)
 
     home_buttons = [
-        ("Access", lambda: show_frame(frames["access"]), icons["access"]),
+        ("Live Feed", lambda: show_frame(frames["feed"]), icons["feed"]),
         ("Logs", lambda: show_frame(frames["logs"]), icons["logs"]),
         ("Config", lambda: show_frame(frames["config"]), icons["config"]),
         ("Wi-Fi", lambda: show_frame(frames["wifi"]), icons["wifi"]),
@@ -171,8 +171,8 @@ def run_ui():
             make_label_button(cell, label, cmd, image=icon)
 
     # Access Panel
-    access = frames["access"]
-    tk.Label(access, text="Access Panel", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
+    access = frames["feed"]
+    tk.Label(access, text="Live Feed", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
     tk.Label(access, text="Camera Feed Here", bg="black", fg="white", width=120, height=22).pack(pady=10)
 
     back_btn = make_label_button(access, "", lambda: show_frame(home), image=icons["back"])

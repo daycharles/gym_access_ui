@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update logo image size and adjust workspace settings">
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
-    </list>
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update home screen label and adjust workspace settings" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -222,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742906044872</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="refactor: update home screen label and adjust workspace settings">
+      <option name="closed" value="true" />
+      <created>1742906158956</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1742906158956</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -252,7 +258,8 @@
     <MESSAGE value="added ability to minimize and maximize screen. Larger home icons" />
     <MESSAGE value="refactor: remove unused global variable and update workspace settings" />
     <MESSAGE value="refactor: update logo image size and adjust workspace settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update logo image size and adjust workspace settings" />
+    <MESSAGE value="refactor: update home screen label and adjust workspace settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update home screen label and adjust workspace settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
