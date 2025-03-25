@@ -67,7 +67,7 @@ def make_label_button(parent, text, command, image=None):
     return lbl
 
 def run_ui():
-    global theme, theme_mode, Minimize
+    global theme, theme_mode
     users = load_users()
     config = load_config()
     theme_mode = config.get("theme_mode", "system")
