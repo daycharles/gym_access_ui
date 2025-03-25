@@ -93,7 +93,7 @@ def run_ui():
         "save": load_and_resize_image("assets/icons/save-dark.png", (50, 50)),
         "back": load_and_resize_image("assets/icons/back-dark.png", (50, 50)),
         "scan": load_and_resize_image("assets/icons/scan-dark.png", (70, 70)),
-        "logo": load_and_resize_image("assets/icons/Gatewise-thumbnail.PNG", (50, 50)),
+        "logo": load_and_resize_image("assets/icons/Gatewise.PNG", (80, 80)),
     }
 
     # Page container
