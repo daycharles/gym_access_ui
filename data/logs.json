@@ -75,5 +75,96 @@
     "status": "granted",
     "snapshot": "assets/snapshots\\12345678_20250325_063401.jpg",
     "timestamp": "2025-03-25T06:34:01.833513"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_182004.jpg",
+    "timestamp": "2025-03-26T18:20:04.610686"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_182902.jpg",
+    "timestamp": "2025-03-26T18:29:02.457559"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_183316.jpg",
+    "timestamp": "2025-03-26T18:33:16.940852"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_183836.jpg",
+    "timestamp": "2025-03-26T18:38:36.899887"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_184010.jpg",
+    "timestamp": "2025-03-26T18:40:10.986166"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_184215.jpg",
+    "timestamp": "2025-03-26T18:42:15.072753"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_184316.jpg",
+    "timestamp": "2025-03-26T18:43:16.228540"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_184403.jpg",
+    "timestamp": "2025-03-26T18:44:03.981477"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_184446.jpg",
+    "timestamp": "2025-03-26T18:44:46.906796"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_184705.jpg",
+    "timestamp": "2025-03-26T18:47:05.210924"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_184848.jpg",
+    "timestamp": "2025-03-26T18:48:48.506159"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_185021.jpg",
+    "timestamp": "2025-03-26T18:50:21.013827"
+  },
+  {
+    "uid": "12345678",
+    "name": "John Doe",
+    "status": "granted",
+    "snapshot": "assets/snapshots\\12345678_20250326_185318.jpg",
+    "timestamp": "2025-03-26T18:53:18.972850"
   }
 ]

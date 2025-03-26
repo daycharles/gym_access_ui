@@ -1,4 +1,3 @@
-# ui.py (final GateWise version)
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 from datetime import datetime
@@ -16,10 +15,12 @@ from wifi import load_wifi_config, save_wifi_config, write_to_wpa_supplicant, re
 # Theme Definitions
 DAY_THEME = {"bg": "#ffffff", "fg": "#000000", "accent": "#dddddd", "button": "#f0f0f0"}
 NIGHT_THEME = {"bg": "#294856", "fg": "#ffffff", "accent": "#3a3a3a", "button": "#2d2d2d"}
+# TODO: Add more themes (branding?) Include logo in the theme?
 
 theme_mode = None
 theme = {}
 is_minimized = False
+
 
 def determine_theme(mode):
     hour = datetime.now().hour
@@ -49,22 +50,26 @@ def reload_theme(root, frames, config):
             except:
                 pass
 
+
 def load_and_resize_image(path, size):
     img = Image.open(path)
     img = img.resize(size, Image.LANCZOS)
     return ImageTk.PhotoImage(img)
 
+
 def launch_keyboard(widget=None):
     subprocess.Popen(["matchbox-keyboard"])
 
+
 def make_label_button(parent, text, command, image=None):
     lbl = tk.Label(parent, text=text, image=image, font=("Arial", 16),  # Increased font size to 16
-                   fg=theme["fg"], bg=theme["bg"], cursor="hand2", padx=10, pady= 10, compound="top", width=90)
+                   fg=theme["fg"], bg=theme["bg"], cursor="hand2", padx=10, pady=10, compound="top", width=90)
     lbl.bind("<Button-1>", lambda e: command())
     lbl.bind("<Enter>", lambda e: lbl.config(bg=theme["accent"]))
     lbl.bind("<Leave>", lambda e: lbl.config(bg=theme["bg"]))
     lbl.pack(side="left", padx=10, pady=10)
     return lbl
+
 
 def run_ui():
     global theme, theme_mode
@@ -85,6 +90,12 @@ def run_ui():
         "logs": load_and_resize_image("assets/icons/logs-white.png", (80, 80)),
         "config": load_and_resize_image("assets/icons/config_white.png", (80, 80)),
         "wifi": load_and_resize_image("assets/icons/wifi_white.png", (80, 80)),
+        "keypad": load_and_resize_image("assets/icons/keypad_white.png", (80, 80)),
+        "camera": load_and_resize_image("assets/icons/camera_white.png", (80, 80)),
+        "relay": load_and_resize_image("assets/icons/relay_white.png", (80, 80)),
+        "scan": load_and_resize_image("assets/icons/scan_white.png", (80, 80)),
+        "led": load_and_resize_image("assets/icons/led_white.png", (80, 80)),
+        "hardware": load_and_resize_image("assets/icons/hardware_white.png", (80, 80)),
         "admin": load_and_resize_image("assets/icons/admin_white.png", (80, 80)),
         "minimize": load_and_resize_image("assets/icons/minimize_white.png", (80, 80)),
         "maximize": load_and_resize_image("assets/icons/maximize_white.png", (80, 80)),
@@ -93,21 +104,24 @@ def run_ui():
         "save": load_and_resize_image("assets/icons/save_white.png", (50, 50)),
         "back": load_and_resize_image("assets/icons/back_white.png", (50, 50)),
         "logo": load_and_resize_image("assets/icons/Gatewise.PNG", (100, 100)),
+        "rfid": load_and_resize_image("assets/icons/scan_white.png", (100, 100)),
     }
 
     # Page container
     frames = {}
-    for name in ["home", "feed", "logs", "config", "wifi", "admin"]:
+    for name in ["home", "feed", "logs", "config", "admin", "hardware"]:
         frame = tk.Frame(root, bg=theme["bg"])
         frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=1, relheight=1)
         frames[name] = frame
 
         # Clock
-        clock_label = tk.Label(frame, font=("Arial", 14), fg=theme["fg"], bg=theme["bg"])
+        clock_label = tk.Label(frame, font=("Arial", 20), fg=theme["fg"], bg=theme["bg"])
         clock_label.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
+
         def update_clock(lbl=clock_label):
             lbl.config(text=datetime.now().strftime("%m-%d-%Y %H:%M"))
-            lbl.after(1000, update_clock)
+            lbl.after(1000, lambda: update_clock(lbl))
+
         update_clock()
 
     def show_frame(f):
@@ -118,14 +132,14 @@ def run_ui():
         root.attributes("-fullscreen", False)
         root.iconify()
         is_minimized = True
-        minimize_btn.config(image=icons["maximize"], text = "Maximize")
+        minimize_btn.config(image=icons["maximize"], text="Maximize")
 
     def maximize_app():
         global is_minimized
         root.deiconify()
         root.attributes("-fullscreen", True)
         is_minimized = False
-        minimize_btn.config(image=icons["minimize"], text = "Minimize")
+        minimize_btn.config(image=icons["minimize"], text="Minimize")
 
     def toggle_minimize_maximize():
         if is_minimized:
@@ -154,7 +168,8 @@ def run_ui():
         ("Live Feed", lambda: show_frame(frames["feed"]), icons["feed"]),
         ("Logs", lambda: show_frame(frames["logs"]), icons["logs"]),
         ("Config", lambda: show_frame(frames["config"]), icons["config"]),
-        ("Wi-Fi", lambda: show_frame(frames["wifi"]), icons["wifi"]),
+        ("Hardware", lambda: show_frame(frames["hardware"]), icons["hardware"]),
+        # ("Wi-Fi", lambda: show_frame(frames["wifi"]), icons["wifi"]),
         ("Admin", lambda: show_frame(frames["admin"]), icons["admin"]),
         ("Minimize", toggle_minimize_maximize, icons["minimize"]),
     ]
@@ -240,49 +255,159 @@ def run_ui():
     back_btn.place(relx=1.0, rely=1.0, anchor="se", x=-20, y=-20)
 
     # Wi-Fi Screen
-    wifi = frames["wifi"]
-    wifi.place(relx=0.5, rely=0.5, anchor="center")
-    wifi_config = load_wifi_config()
-    tk.Label(wifi, text="Wi-Fi Settings", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
+    # wifi = frames["wifi"]
+    # wifi.place(relx=0.5, rely=0.5, anchor="center")
+    # wifi_config = load_wifi_config()
+    # tk.Label(wifi, text="Wi-Fi Settings", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
+    #
+    # wifi_content = tk.Frame(wifi, bg=theme["bg"])
+    # wifi_content.place(relx=0.5, rely=0.5, anchor="center")
+    #
+    # tk.Label(wifi, text="Current SSID:", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack()
+    # current_ssid_label = tk.Label(wifi, text=wifi_config.get("ssid", ""), font=("Helvetica", 20), bg=theme["bg"],
+    #                               fg=theme["fg"])
+    # current_ssid_label.pack()
+    #
+    # tk.Label(wifi, text="SSID:", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack()
+    # ssid_entry = tk.Entry(wifi, font=("Helvetica", 20), bg=theme["accent"], fg=theme["fg"])
+    # ssid_entry.insert(0, wifi_config.get("ssid", ""))
+    # ssid_entry.pack()
+    #
+    # tk.Label(wifi, text="Password:", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack()
+    # password_entry = tk.Entry(wifi, font=("Helvetica", 20), bg=theme["accent"], fg=theme["fg"])
+    # password_entry.insert(0, wifi_config.get("password", ""))
+    # password_entry.pack()
+    #
+    # keyboard_label = tk.Label(wifi, text="🧠 Keyboard", font=("Arial", 12, "bold"),
+    #                           bg=theme["bg"], fg=theme["fg"], cursor="hand2")
+    # keyboard_label.pack(pady=5)
+    # keyboard_label.bind("<Button-1>", lambda e: launch_keyboard(wifi))
+    #
+    # def update_wifi():
+    #     ssid = ssid_entry.get().strip()
+    #     password = password_entry.get().strip()
+    #     save_wifi_config(ssid, password)
+    #     if write_to_wpa_supplicant(ssid, password):
+    #         restart_wifi()
+    #         current_ssid_label.config(text=ssid)
+    #         messagebox.showinfo("Wi-Fi", "Wi-Fi settings applied.")
+    #     else:
+    #         messagebox.showerror("Error", "Permission denied. Try running with sudo.")
+    #
+    # footer = tk.Frame(wifi, bg=theme["bg"])
+    # footer.pack(pady=20)
+    # make_label_button(footer, "", update_wifi, image=icons["save"])
+    # back_btn = make_label_button(wifi, "", lambda: show_frame(home), image=icons["back"])
+    # back_btn.place(relx=1.0, rely=1.0, anchor="se", x=-20, y=-20)
 
-    wifi_content = tk.Frame(wifi, bg=theme["bg"])
-    wifi_content.place(relx=0.5, rely=0.5, anchor="center")
+    # Hardware Test Tab
+    hardware_tab = frames["hardware"]
+    hardware_tab.place(relx=0.5, rely=0.5, anchor="center", relwidth=1, relheight=1)
+    tk.Label(hardware_tab, text="Hardware Test Panel", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(
+        pady=20)
 
-    tk.Label(wifi, text="Current SSID:", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack()
-    current_ssid_label = tk.Label(wifi, text=wifi_config.get("ssid", ""), font=("Helvetica", 20), bg=theme["bg"],
-                                  fg=theme["fg"])
-    current_ssid_label.pack()
+    hardware_buttons = tk.Frame(hardware_tab, bg=theme["bg"])
+    hardware_buttons.pack(pady=20)  # Ensure the frame is packed
 
-    tk.Label(wifi, text="SSID:", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack()
-    ssid_entry = tk.Entry(wifi, font=("Helvetica", 20), bg=theme["accent"], fg=theme["fg"])
-    ssid_entry.insert(0, wifi_config.get("ssid", ""))
-    ssid_entry.pack()
+    # Status Area
+    status_var = tk.StringVar(value="Status: Awaiting test")
+    status_label = tk.Label(hardware_tab, textvariable=status_var, font=("Arial", 14), bg=theme["bg"],
+                            fg=theme["fg"])
+    status_label.pack(pady=10)
 
-    tk.Label(wifi, text="Password:", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack()
-    password_entry = tk.Entry(wifi, font=("Helvetica", 20), bg=theme["accent"], fg=theme["fg"])
-    password_entry.insert(0, wifi_config.get("password", ""))
-    password_entry.pack()
+    status_list = tk.Text(hardware_tab, wrap=tk.NONE, bg=theme["bg"], fg=theme["fg"], width=50, height=10)
+    status_list.pack(side="left", fill="both", expand=True, pady=5)
 
-    keyboard_label = tk.Label(wifi, text="🧠 Keyboard", font=("Arial", 12, "bold"),
-                              bg=theme["bg"], fg=theme["fg"], cursor="hand2")
-    keyboard_label.pack(pady=5)
-    keyboard_label.bind("<Button-1>", lambda e: launch_keyboard(wifi))
+    v_scroll = tk.Scrollbar(status_list, orient="vertical", command=status_list.yview)
+    v_scroll.pack(side="right", fill="y")
+    status_list.config(yscrollcommand=v_scroll.set)
+    h_scroll = tk.Scrollbar(status_list, orient="horizontal", command=status_list.xview)
+    h_scroll.pack(side="bottom", fill="x")
+    status_list.config(xscrollcommand=h_scroll.set)
 
-    def update_wifi():
-        ssid = ssid_entry.get().strip()
-        password = password_entry.get().strip()
-        save_wifi_config(ssid, password)
-        if write_to_wpa_supplicant(ssid, password):
-            restart_wifi()
-            current_ssid_label.config(text=ssid)
-            messagebox.showinfo("Wi-Fi", "Wi-Fi settings applied.")
-        else:
-            messagebox.showerror("Error", "Permission denied. Try running with sudo.")
+    def update_status(message):
+        status_var.set(f"Status: {message}")
+        status_list.insert(tk.END, f"{datetime.now().strftime('%H:%M:%S')} | {message}\n")
 
-    footer = tk.Frame(wifi, bg=theme["bg"])
+    def test_rfid():
+        simulate_scan("12345678")
+        update_status("Simulated RFID scan (UID: 12345678)")
+
+    def test_keypad():
+        messagebox.showinfo("Keypad", "Simulated PIN entered: 4321")
+        update_status("Simulated keypad input: 4321")
+
+    def test_relay():
+        try:
+            import RPi.GPIO as GPIO
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(26, GPIO.OUT)
+            GPIO.output(26, GPIO.HIGH)
+            root.after(1000, lambda: GPIO.output(26, GPIO.LOW))
+            update_status("Relay triggered on GPIO 26")
+        except Exception as e:
+            update_status(f"Relay Error: {e}")
+            messagebox.showerror("Relay Error", str(e))
+
+    def test_led():
+        try:
+            import RPi.GPIO as GPIO
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(17, GPIO.OUT)
+            for _ in range(3):
+                GPIO.output(17, GPIO.HIGH)
+                root.update()
+                root.after(200)
+                GPIO.output(17, GPIO.LOW)
+                root.after(200)
+            update_status("LED blinked on GPIO 17")
+        except Exception as e:
+            update_status(f"LED Error: {e}")
+            messagebox.showerror("LED Error", str(e))
+
+    def test_camera():
+        try:
+            frame_img = get_mock_frame()
+            path = take_mock_snapshot("test", frame_img)
+            update_status(f"Camera snapshot saved to {path}")
+            messagebox.showinfo("Camera", f"Snapshot saved to {path}")
+        except Exception as e:
+            update_status(f"Camera Error: {e}")
+            messagebox.showerror("Camera Error", str(e))
+
+    make_label_button(hardware_buttons, "RFID", test_rfid, icons["rfid"])
+    make_label_button(hardware_buttons, "Keypad", test_keypad, icons["keypad"])
+    make_label_button(hardware_buttons, "Relay", test_relay, icons["relay"])
+    make_label_button(hardware_buttons, "LED", test_led, icons["led"])
+    make_label_button(hardware_buttons, "Camera", test_camera, icons["camera"])
+
+    # GPIO Pin Reference
+    pin_frame = tk.Frame(frames["hardware"], bg=theme["bg"])
+    pin_frame.pack(pady=10)
+
+    pin_label = tk.Label(pin_frame, text="""GPIO Pin Reference:
+    RFID-RC522:
+      SDA  → GPIO 8
+      SCK  → GPIO 11
+      MOSI → GPIO 10
+      MISO → GPIO 9
+      RST  → GPIO 25
+
+    Keypad:
+      Rows/Cols → GPIO 2–9
+
+    Relay:
+      IN1 → GPIO 26
+
+    Test LED:
+      Anode → GPIO 17 (220Ω resistor)
+      Cathode → GND
+    """, font=("Courier", 10), justify="left", bg=theme["bg"], fg=theme["fg"])
+    pin_label.pack()
+
+    footer = tk.Frame(hardware_tab, bg=theme["bg"])
     footer.pack(pady=20)
-    make_label_button(footer, "", update_wifi, image=icons["save"])
-    back_btn = make_label_button(wifi, "", lambda: show_frame(home), image=icons["back"])
+    back_btn = make_label_button(hardware_tab, "", lambda: show_frame(home), image=icons["back"])
     back_btn.place(relx=1.0, rely=1.0, anchor="se", x=-20, y=-20)
 
     # Admin Panel (placeholder for blackout/schedule)
@@ -370,3 +495,4 @@ def run_ui():
 
     show_frame(home)
     root.mainloop()
+

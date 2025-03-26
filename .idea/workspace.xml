@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update home screen layout and icon colors for improved visibility">
-      <change afterPath="$PROJECT_DIR$/assets/icons/back_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/export_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/refresh_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/save_white.png" afterDir="false" />
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update access logs and improve night theme colors for better visibility">
+      <change afterPath="$PROJECT_DIR$/assets/icons/camera_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/hardware_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/keypad_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/led_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/relay_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/scan_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hardware_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/logs.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/logs.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +98,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
+        <option value="bundled-python-sdk-6a3326d57233-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.24807.21" />
       </set>
     </attachedChunks>
   </component>
@@ -251,7 +255,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742918489241</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="refactor: update access logs and improve night theme colors for better visibility">
+      <option name="closed" value="true" />
+      <created>1742919812233</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1742919812233</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -284,7 +296,8 @@
     <MESSAGE value="refactor: update home screen label and adjust workspace settings" />
     <MESSAGE value="refactor: update home screen to display live feed and adjust icon references" />
     <MESSAGE value="refactor: update home screen layout and icon colors for improved visibility" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update home screen layout and icon colors for improved visibility" />
+    <MESSAGE value="refactor: update access logs and improve night theme colors for better visibility" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update access logs and improve night theme colors for better visibility" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
