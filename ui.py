@@ -349,12 +349,20 @@ def run_ui():
             messagebox.showerror("Relay Error", str(e))
 
     def test_led():
-        import RPi.GPIO as GPIO
-        GPIO.setmode(GPIO.BCM)
-        led_pin = 21
-        GPIO.setup(led_pin, GPIO.OUT)
-        GPIO.output(led_pin, GPIO.HIGH)
-        print("LED ON")
+        try:
+            import RPi.GPIO as GPIO
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(21, GPIO.OUT)  # <--- changed to match your wiring
+            for _ in range(3):
+                GPIO.output(21, GPIO.HIGH)
+                root.update()
+                root.after(200)
+                GPIO.output(21, GPIO.LOW)
+                root.after(200)
+            update_status("LED blinked on GPIO 21")
+        except Exception as e:
+            update_status(f"LED Error: {e}")
+            messagebox.showerror("LED Error", str(e))
 
     def test_camera():
         try:
