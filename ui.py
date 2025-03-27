@@ -352,12 +352,12 @@ def run_ui():
         try:
             import RPi.GPIO as GPIO
             GPIO.setmode(GPIO.BCM)
-            GPIO.setup(21, GPIO.OUT)  # <--- changed to match your wiring
+            GPIO.setup(26, GPIO.OUT)  # <--- changed to match your wiring
             for _ in range(3):
-                GPIO.output(21, GPIO.HIGH)
+                GPIO.output(37, GPIO.HIGH)
                 root.update()
                 root.after(200)
-                GPIO.output(21, GPIO.LOW)
+                GPIO.output(37, GPIO.LOW)
                 root.after(200)
             update_status("LED blinked on GPIO 21")
         except Exception as e:

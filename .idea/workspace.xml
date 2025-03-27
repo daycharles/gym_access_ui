@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: add hardware test functionality and update UI for better interaction">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
-    </list>
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: enhance LED test functionality with blinking pattern and error handling" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -264,7 +260,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743029632146</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="refactor: restructure blackout schedule and enhance user management UI">
+      <option name="closed" value="true" />
+      <created>1743091276340</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1743091276340</updated>
+    </task>
+    <task id="LOCAL-00022" summary="refactor: enhance LED test functionality with blinking pattern and error handling">
+      <option name="closed" value="true" />
+      <created>1743091545152</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1743091545152</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -299,7 +311,9 @@
     <MESSAGE value="refactor: update home screen layout and icon colors for improved visibility" />
     <MESSAGE value="refactor: update access logs and improve night theme colors for better visibility" />
     <MESSAGE value="refactor: add hardware test functionality and update UI for better interaction" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: add hardware test functionality and update UI for better interaction" />
+    <MESSAGE value="refactor: restructure blackout schedule and enhance user management UI" />
+    <MESSAGE value="refactor: enhance LED test functionality with blinking pattern and error handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: enhance LED test functionality with blinking pattern and error handling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
