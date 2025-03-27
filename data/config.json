@@ -1,22 +1,51 @@
 {
   "admin_pin": "1234",
   "blackout": {
-    "Monday": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
-    "Sunday": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ]
+    "Mon": {
+      "start": 0,
+      "end": 0,
+      "all_day": false
+    },
+    "Tue": {
+      "start": 0,
+      "end": 0,
+      "all_day": false
+    },
+    "Wed": {
+      "start": 0,
+      "end": 0,
+      "all_day": false
+    },
+    "Thu": {
+      "start": 0,
+      "end": 0,
+      "all_day": false
+    },
+    "Fri": {
+      "start": 0,
+      "end": 0,
+      "all_day": false
+    },
+    "Sat": {
+      "start": 0,
+      "end": 0,
+      "all_day": false
+    },
+    "Sun": {
+      "start": 0,
+      "end": 0,
+      "all_day": false
+    }
   },
-  "theme_mode": "night"
+  "theme_mode": "night",
+  "users": {
+    "12345678": {
+      "name": "Bob Dole",
+      "admin": true
+    },
+    "87654321": {
+      "name": "Jane Smith",
+      "admin": false
+    }
+  }
 }

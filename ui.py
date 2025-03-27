@@ -73,7 +73,6 @@ def make_label_button(parent, text, command, image=None):
 
 def run_ui():
     global theme, theme_mode
-    users = load_users()
     config = load_config()
     theme_mode = config.get("theme_mode", "system")
     theme = determine_theme(theme_mode)
@@ -350,20 +349,12 @@ def run_ui():
             messagebox.showerror("Relay Error", str(e))
 
     def test_led():
-        try:
-            import RPi.GPIO as GPIO
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(17, GPIO.OUT)
-            for _ in range(3):
-                GPIO.output(17, GPIO.HIGH)
-                root.update()
-                root.after(200)
-                GPIO.output(17, GPIO.LOW)
-                root.after(200)
-            update_status("LED blinked on GPIO 17")
-        except Exception as e:
-            update_status(f"LED Error: {e}")
-            messagebox.showerror("LED Error", str(e))
+        import RPi.GPIO as GPIO
+        GPIO.setmode(GPIO.BCM)
+        led_pin = 21
+        GPIO.setup(led_pin, GPIO.OUT)
+        GPIO.output(led_pin, GPIO.HIGH)
+        print("LED ON")
 
     def test_camera():
         try:
@@ -410,23 +401,34 @@ def run_ui():
     back_btn = make_label_button(hardware_tab, "", lambda: show_frame(home), image=icons["back"])
     back_btn.place(relx=1.0, rely=1.0, anchor="se", x=-20, y=-20)
 
-    # Admin Panel (placeholder for blackout/schedule)
+    # Admin Panel
     admin_tab = frames["admin"]
     tk.Label(admin_tab, text="Admin Panel", font=("Helvetica", 24), bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
     days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     hours = [f"{h:02d}:00" for h in range(24)]
     blackout_settings = config.get("blackout", {})
 
-    admin_content = tk.Frame(admin_tab, bg=theme["bg"])
-    admin_content.place(relx=0.5, rely=0.5, anchor="center")
+    admin_tabs = ttk.Notebook(admin_tab)
+    admin_tabs.pack(expand=True, fill="both")
 
-    tk.Label(admin_content, text="🕒 Blackout Schedule", font=("Helvetica", 20),
+    # Create a ttk.Style object
+    style = ttk.Style()
+
+    # Configure the TNotebook.Tab style
+    style.configure("TNotebook.Tab", font=("Helvetica", 16))  # Change font to Helvetica, size 16
+
+    # --- Blackout Tab ---
+    blackout_tab = tk.Frame(admin_tabs, bg=theme["bg"])
+    admin_tabs.add(blackout_tab, text="Blackout Schedule")
+
+    tk.Label(blackout_tab, text="🕒 Blackout Schedule", font=("Helvetica", 20),
              bg=theme["bg"], fg=theme["fg"]).pack(pady=(10, 20))
 
+    blackout_settings = config.get("blackout", {})
     day_widgets = {}
 
     for day in days:
-        row = tk.Frame(admin_content, bg=theme["bg"])
+        row = tk.Frame(blackout_tab, bg=theme["bg"])
         row.pack(pady=5)
 
         tk.Label(row, text=day, font=("Arial", 16, "bold"), width=5,
@@ -456,7 +458,6 @@ def run_ui():
                                      bg=theme["bg"], fg=theme["fg"], selectcolor=theme["accent"])
         all_day_chk.pack(side="left", padx=10)
 
-        # Load saved values
         saved = blackout_settings.get(day, {})
         start_var.set(f"{saved.get('start', 0):02d}:00")
         end_var.set(f"{saved.get('end', 0):02d}:00")
@@ -469,7 +470,6 @@ def run_ui():
             "all_day": all_day_var
         }
 
-    # Save function
     def save_blackout():
         blackout_config = {}
         for day in days:
@@ -481,17 +481,57 @@ def run_ui():
         save_config(config)
         messagebox.showinfo("Saved", "Blackout schedule saved.")
 
+    tk.Button(blackout_tab, text="Save Blackout", command=save_blackout,
+              font=("Arial", 14), bg=theme["accent"], fg=theme["fg"]).pack(pady=10)
     # Save and Back controls
-    footer = tk.Frame(admin_content, bg=theme["bg"])
+    footer = tk.Frame(blackout_tab, bg=theme["bg"])
     footer.pack(pady=20)
-    make_label_button(footer, "", save_blackout, image=icons["save"])
-    back_btn = make_label_button(admin_tab, "", lambda: show_frame(home), image=icons["back"])
+    back_btn = make_label_button(blackout_tab, "", lambda: show_frame(home), image=icons["back"])
     back_btn.place(relx=1.0, rely=1.0, anchor="se", x=-20, y=-20)
 
-    keyboard_label = tk.Label(admin_content, text="🧠 Keyboard", font=("Arial", 12, "bold"),
-                              bg=theme["bg"], fg=theme["fg"], cursor="hand2")
-    keyboard_label.pack(pady=5)
-    keyboard_label.bind("<Button-1>", lambda e: launch_keyboard())
+
+    # --- Card Manager Tab ---
+    from storage import load_users, save_config
+
+    card_tab = tk.Frame(admin_tabs, bg=theme["bg"])
+    admin_tabs.add(card_tab, text="Card Manager")
+
+    tk.Label(card_tab, text="🪪 Assign Card to User", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack(
+        pady=10)
+
+    last_uid = tk.StringVar(value="12345678")
+    tk.Label(card_tab, text="Last Scanned UID:", font=("Arial", 16), bg=theme["bg"], fg=theme["fg"]).pack()
+    tk.Label(card_tab, textvariable=last_uid, font=("Arial", 16), bg=theme["bg"], fg=theme["fg"]).pack()
+
+    name_entry = tk.Entry(card_tab, font=("Arial", 16), bg=theme["accent"], fg=theme["fg"])
+    name_entry.pack(pady=10)
+    name_entry.insert(0, "User Name")
+
+    is_admin_var = tk.BooleanVar()
+    tk.Checkbutton(card_tab, text="Grant Admin Access", variable=is_admin_var,
+                   bg=theme["bg"], fg=theme["fg"], selectcolor=theme["accent"], font=("Arial", 14)).pack(pady=5)
+
+    def save_user():
+        uid = last_uid.get()
+        name = name_entry.get().strip()
+        is_admin = is_admin_var.get()
+        if not name:
+            messagebox.showerror("Error", "Please enter a name.")
+            return
+        users = load_users()
+        users[uid] = {"name": name, "admin": is_admin}
+        config["users"] = users
+        save_config(config)
+        messagebox.showinfo("Saved", f"Assigned {name} to UID {uid}.")
+
+    tk.Button(card_tab, text="Save Assignment", command=save_user,
+              font=("Arial", 14), bg=theme["accent"], fg=theme["fg"]).pack(pady=10)
+
+    # Save and Back controls
+    footer = tk.Frame(card_tab, bg=theme["bg"])
+    footer.pack(pady=20)
+    back_btn = make_label_button(card_tab, "", lambda: show_frame(home), image=icons["back"])
+    back_btn.place(relx=1.0, rely=1.0, anchor="se", x=-20, y=-20)
 
     show_frame(home)
     root.mainloop()
