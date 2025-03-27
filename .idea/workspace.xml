@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: enhance LED test functionality with blinking pattern and error handling" />
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update GPIO pin configuration for LED blinking functionality" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -276,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743091545152</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="refactor: update GPIO pin configuration for LED blinking functionality">
+      <option name="closed" value="true" />
+      <created>1743095945708</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1743095945708</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -313,7 +321,8 @@
     <MESSAGE value="refactor: add hardware test functionality and update UI for better interaction" />
     <MESSAGE value="refactor: restructure blackout schedule and enhance user management UI" />
     <MESSAGE value="refactor: enhance LED test functionality with blinking pattern and error handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: enhance LED test functionality with blinking pattern and error handling" />
+    <MESSAGE value="refactor: update GPIO pin configuration for LED blinking functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update GPIO pin configuration for LED blinking functionality" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
