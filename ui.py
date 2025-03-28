@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox, simpledialog
 from datetime import datetime
 from PIL import Image, ImageTk
 import subprocess
-from pirc522 import RFID
+from mfrc522 import SimpleMFRC522
 import RPi.GPIO as GPIO
 
 
@@ -331,18 +331,17 @@ def run_ui():
         status_var.set(f"Status: {message}")
         status_list.insert(tk.END, f"{datetime.now().strftime('%H:%M:%S')} | {message}\n")
 
-    def test_rfid():
-        rdr = RFID()
+    def test_rfid_scan():
         try:
-            print("Waiting for card...")
-            rdr.wait_for_tag()
-            (error, tag_type) = rdr.request()
-            if not error:
-                (error, uid) = rdr.anticoll()
-                if not error:
-                    print("Card detected. UID:", "-".join(map(str, uid)))
+            reader = SimpleMFRC522()
+            status_label.config(text="Place card near reader...")
+            root.update_idletasks()
+            uid, text = reader.read()
+            status_label.config(text=f"RFID UID: {uid}")
+        except Exception as e:
+            status_label.config(text=f"RFID Error: {e}")
         finally:
-            rdr.cleanup()
+            GPIO.cleanup()
 
     def test_keypad():
         messagebox.showinfo("Keypad", "Simulated PIN entered: 4321")
