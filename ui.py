@@ -3,6 +3,9 @@ from tkinter import ttk, messagebox, simpledialog
 from datetime import datetime
 from PIL import Image, ImageTk
 import subprocess
+from mfrc522 import SimpleMFRC522
+import RPi.GPIO as GPIO
+
 
 from camera import get_mock_frame, take_mock_snapshot
 from storage import (
@@ -329,8 +332,18 @@ def run_ui():
         status_list.insert(tk.END, f"{datetime.now().strftime('%H:%M:%S')} | {message}\n")
 
     def test_rfid():
-        simulate_scan("12345678")
-        update_status("Simulated RFID scan (UID: 12345678)")
+        try:
+            reader = SimpleMFRC522()
+            status_label.config(text="Waiting for card scan...")
+            root.update_idletasks()
+            uid, text = reader.read()
+            status_label.config(text=f"UID: {uid}")
+        except Exception as e:
+            status_label.config(text=f"RFID Error: {e}")
+        finally:
+            GPIO.cleanup()
+
+    make_label_button(hardware_tab, "Test RFID", test_rfid)
 
     def test_keypad():
         messagebox.showinfo("Keypad", "Simulated PIN entered: 4321")
