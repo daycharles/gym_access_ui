@@ -344,8 +344,6 @@ def run_ui():
         finally:
             rdr.cleanup()
 
-    make_label_button(hardware_tab, "Test RFID", test_rfid)
-
     def test_keypad():
         messagebox.showinfo("Keypad", "Simulated PIN entered: 4321")
         update_status("Simulated keypad input: 4321")
@@ -395,28 +393,28 @@ def run_ui():
     make_label_button(hardware_buttons, "Camera", test_camera, icons["camera"])
 
     # GPIO Pin Reference
-    pin_frame = tk.Frame(frames["hardware"], bg=theme["bg"])
-    pin_frame.pack(pady=10)
-
-    pin_label = tk.Label(pin_frame, text="""GPIO Pin Reference:
-    RFID-RC522:
-      SDA  → GPIO 8
-      SCK  → GPIO 11
-      MOSI → GPIO 10
-      MISO → GPIO 9
-      RST  → GPIO 25
-
-    Keypad:
-      Rows/Cols → GPIO 2–9
-
-    Relay:
-      IN1 → GPIO 26
-
-    Test LED:
-      Anode → GPIO 17 (220Ω resistor)
-      Cathode → GND
-    """, font=("Courier", 10), justify="left", bg=theme["bg"], fg=theme["fg"])
-    pin_label.pack()
+    # pin_frame = tk.Frame(frames["hardware"], bg=theme["bg"])
+    # pin_frame.pack(pady=10)
+    #
+    # pin_label = tk.Label(pin_frame, text="""GPIO Pin Reference:
+    # RFID-RC522:
+    #   SDA  → GPIO 8
+    #   SCK  → GPIO 11
+    #   MOSI → GPIO 10
+    #   MISO → GPIO 9
+    #   RST  → GPIO 25
+    #
+    # Keypad:
+    #   Rows/Cols → GPIO 2–9
+    #
+    # Relay:
+    #   IN1 → GPIO 26
+    #
+    # Test LED:
+    #   Anode → GPIO 17 (220Ω resistor)
+    #   Cathode → GND
+    # """, font=("Courier", 10), justify="left", bg=theme["bg"], fg=theme["fg"])
+    # pin_label.pack()
 
     footer = tk.Frame(hardware_tab, bg=theme["bg"])
     footer.pack(pady=20)
