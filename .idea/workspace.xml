@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update GPIO pin configuration for LED blinking functionality">
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: implement RFID card scanning functionality with error handling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mock_rfid.py" beforeDir="false" afterPath="$PROJECT_DIR$/mock_rfid.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743101139760</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="refactor: implement RFID card scanning functionality with error handling">
+      <option name="closed" value="true" />
+      <created>1743160848150</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1743160848150</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -341,7 +349,8 @@
     <MESSAGE value="refactor: restructure blackout schedule and enhance user management UI" />
     <MESSAGE value="refactor: enhance LED test functionality with blinking pattern and error handling" />
     <MESSAGE value="refactor: update GPIO pin configuration for LED blinking functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update GPIO pin configuration for LED blinking functionality" />
+    <MESSAGE value="refactor: implement RFID card scanning functionality with error handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: implement RFID card scanning functionality with error handling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

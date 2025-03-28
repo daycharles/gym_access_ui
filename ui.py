@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox, simpledialog
 from datetime import datetime
 from PIL import Image, ImageTk
 import subprocess
-from mfrc522 import SimpleMFRC522
+from pirc522 import RFID
 import RPi.GPIO as GPIO
 
 
@@ -332,16 +332,17 @@ def run_ui():
         status_list.insert(tk.END, f"{datetime.now().strftime('%H:%M:%S')} | {message}\n")
 
     def test_rfid():
+        rdr = RFID()
         try:
-            reader = SimpleMFRC522()
-            status_label.config(text="Waiting for card scan...")
-            root.update_idletasks()
-            uid, text = reader.read()
-            status_label.config(text=f"UID: {uid}")
-        except Exception as e:
-            status_label.config(text=f"RFID Error: {e}")
+            print("Waiting for card...")
+            rdr.wait_for_tag()
+            (error, tag_type) = rdr.request()
+            if not error:
+                (error, uid) = rdr.anticoll()
+                if not error:
+                    print("Card detected. UID:", "-".join(map(str, uid)))
         finally:
-            GPIO.cleanup()
+            rdr.cleanup()
 
     make_label_button(hardware_tab, "Test RFID", test_rfid)
 
