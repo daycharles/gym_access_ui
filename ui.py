@@ -52,6 +52,24 @@ def reload_theme(root, frames, config):
             except:
                 pass
 
+def capture_snapshot():
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"/home/pi/snapshots/snapshot_{timestamp}.jpg"
+
+    result = subprocess.run(
+        ["libcamera-jpeg", "-o", filename, "--width", "640", "--height", "480", "--nopreview"],
+        capture_output=True,
+        text=True
+    )
+
+    if result.returncode == 0:
+        print(f"📸 Snapshot saved to {filename}")
+        return filename
+    else:
+        print("Failed to capture snapshot")
+        print(result.stderr)
+        return None
+
 def start_live_detection():
     def reader_loop():
         reader = SimpleMFRC522()
