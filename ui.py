@@ -52,20 +52,29 @@ def reload_theme(root, frames, config):
             except:
                 pass
 
+SNAPSHOT_DIR = "snapshots"
+os.makedirs(SNAPSHOT_DIR, exist_ok=True)
+
 def take_snapshot(uid="unknown"):
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"snapshot_{uid}_{timestamp}.jpg"
-    output_path = os.path.join("snapshots", filename)
-
-    os.makedirs("snapshots", exist_ok=True)
-
-    cmd = ["libcamera-jpeg", "-o", output_path, "--width", "640", "--height", "480", "--nopreview", "-n"]
-
     try:
-        subprocess.run(cmd, check=True)
-        return output_path
-    except subprocess.CalledProcessError as e:
-        print(f"Error capturing snapshot: {e}")
+        cap = cv2.VideoCapture(0)
+        if not cap.isOpened():
+            raise RuntimeError("Camera could not be opened.")
+
+        ret, frame = cap.read()
+        cap.release()
+
+        if not ret:
+            raise RuntimeError("Failed to capture frame.")
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{uid}_{timestamp}.jpg"
+        path = os.path.join(SNAPSHOT_DIR, filename)
+
+        cv2.imwrite(path, frame)
+        return path
+    except Exception as e:
+        print(f"[Camera Error] {e}")
         return None
 
 def start_live_detection():
@@ -88,7 +97,7 @@ def start_live_detection():
                 else:
                     status = "granted" if access_granted else "denied"
 
-                snapshot = take_mock_snapshot(uid, get_mock_frame())
+                snapshot = take_snapshot(uid)
                 log_access(uid, name, status, snapshot)
 
                 # Show result
