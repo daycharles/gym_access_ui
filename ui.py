@@ -13,6 +13,7 @@ from storage import (
     is_blackout
 )
 from wifi import load_wifi_config, save_wifi_config, write_to_wpa_supplicant, restart_wifi
+import os
 
 # Theme Definitions
 DAY_THEME = {"bg": "#ffffff", "fg": "#000000", "accent": "#dddddd", "button": "#f0f0f0"}
