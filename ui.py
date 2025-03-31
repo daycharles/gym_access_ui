@@ -52,22 +52,20 @@ def reload_theme(root, frames, config):
             except:
                 pass
 
-def capture_snapshot():
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"/home/pi/snapshots/snapshot_{timestamp}.jpg"
+def take_snapshot(uid="unknown"):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"snapshot_{uid}_{timestamp}.jpg"
+    output_path = os.path.join("snapshots", filename)
 
-    result = subprocess.run(
-        ["libcamera-jpeg", "-o", filename, "--width", "640", "--height", "480", "--nopreview"],
-        capture_output=True,
-        text=True
-    )
+    os.makedirs("snapshots", exist_ok=True)
 
-    if result.returncode == 0:
-        print(f"📸 Snapshot saved to {filename}")
-        return filename
-    else:
-        print("Failed to capture snapshot")
-        print(result.stderr)
+    cmd = ["libcamera-jpeg", "-o", output_path, "--width", "640", "--height", "480", "--nopreview", "-n"]
+
+    try:
+        subprocess.run(cmd, check=True)
+        return output_path
+    except subprocess.CalledProcessError as e:
+        print(f"Error capturing snapshot: {e}")
         return None
 
 def start_live_detection():
