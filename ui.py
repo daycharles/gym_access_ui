@@ -6,7 +6,7 @@ import subprocess
 from mfrc522 import SimpleMFRC522
 import RPi.GPIO as GPIO
 import threading
-from camera import get_mock_frame, take_mock_snapshot
+from camera import get_mock_frame, take_mock_snapshot, take_snapshot
 from storage import (
     log_access, load_users, load_config,
     save_config, load_logs, export_logs_to_csv,
@@ -211,7 +211,7 @@ def run_ui():
 
     def simulate_scan(uid="12345678"):
         frame_img = get_mock_frame()
-        snapshot_path = take_mock_snapshot(uid, frame_img)
+        snapshot_path = take_snapshot(uid)
         status = "granted" if uid in users else "denied"
         name = users.get(uid, {}).get("name", "Unknown")
         if is_blackout(config) and not users.get(uid, {}).get("admin", False):
@@ -442,7 +442,7 @@ def run_ui():
     def test_camera():
         try:
             frame_img = get_mock_frame()
-            path = take_mock_snapshot("test", frame_img)
+            path = take_snapshot("test")
             update_status(f"Camera snapshot saved to {path}")
             messagebox.showinfo("Camera", f"Snapshot saved to {path}")
         except Exception as e:
