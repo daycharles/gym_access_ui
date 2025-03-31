@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: remove unused GPIO pin reference section from UI">
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update RFID card scanning implementation with improved error handling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,13 +45,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/cd104535/PycharmProjects/gym-access-ui"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\cd104535\PycharmProjects\gym-access-ui\assets\icons" />
@@ -326,7 +327,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743161789818</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="refactor: update RFID card scanning implementation with improved error handling">
+      <option name="closed" value="true" />
+      <created>1743164636084</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1743164636084</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -341,7 +350,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added a wifi tab for wifi connection" />
     <MESSAGE value="autostart configuration" />
     <MESSAGE value="Added styling" />
     <MESSAGE value="Updated UI and functionality" />
@@ -366,7 +374,8 @@
     <MESSAGE value="refactor: implement RFID card scanning functionality with error handling" />
     <MESSAGE value="refactor: implement RFID card scanning functionality with updated error handling" />
     <MESSAGE value="refactor: remove unused GPIO pin reference section from UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: remove unused GPIO pin reference section from UI" />
+    <MESSAGE value="refactor: update RFID card scanning implementation with improved error handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update RFID card scanning implementation with improved error handling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

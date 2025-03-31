@@ -334,12 +334,16 @@ def run_ui():
     def test_rfid_scan():
         try:
             reader = SimpleMFRC522()
-            status_label.config(text="Place card near reader...")
+            update_status("Place card near reader...")
             root.update_idletasks()
             uid, text = reader.read()
-            status_label.config(text=f"RFID UID: {uid}")
+            status_msg = f"RFID UID: {uid}"
+            update_status(status_msg)
+            last_uid.set(str(uid))  # Update the UID label in Card Manager
+            messagebox.showinfo("RFID Scan", status_msg)
         except Exception as e:
-            status_label.config(text=f"RFID Error: {e}")
+            update_status(f"RFID Error: {e}")
+            messagebox.showerror("RFID Error", str(e))
         finally:
             GPIO.cleanup()
 
@@ -385,7 +389,7 @@ def run_ui():
             update_status(f"Camera Error: {e}")
             messagebox.showerror("Camera Error", str(e))
 
-    make_label_button(hardware_buttons, "RFID", test_rfid, icons["rfid"])
+    make_label_button(hardware_buttons, "RFID", test_rfid_scan, icons["rfid"])
     make_label_button(hardware_buttons, "Keypad", test_keypad, icons["keypad"])
     make_label_button(hardware_buttons, "Relay", test_relay, icons["relay"])
     make_label_button(hardware_buttons, "LED", test_led, icons["led"])
