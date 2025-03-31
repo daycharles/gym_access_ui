@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update RFID card scanning implementation with improved error handling">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: enhance RFID card scanning with improved status updates and error handling">
+      <change beforePath="$PROJECT_DIR$/data/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -335,7 +336,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743164636084</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="refactor: enhance RFID card scanning with improved status updates and error handling">
+      <option name="closed" value="true" />
+      <created>1743452443957</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1743452443957</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -350,7 +359,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="autostart configuration" />
     <MESSAGE value="Added styling" />
     <MESSAGE value="Updated UI and functionality" />
     <MESSAGE value="Fixed issue with fake feed" />
@@ -375,7 +383,8 @@
     <MESSAGE value="refactor: implement RFID card scanning functionality with updated error handling" />
     <MESSAGE value="refactor: remove unused GPIO pin reference section from UI" />
     <MESSAGE value="refactor: update RFID card scanning implementation with improved error handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update RFID card scanning implementation with improved error handling" />
+    <MESSAGE value="refactor: enhance RFID card scanning with improved status updates and error handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: enhance RFID card scanning with improved status updates and error handling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

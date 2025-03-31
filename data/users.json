@@ -1,4 +1,3 @@
 {
-    "12345678": { "name": "John Doe", "admin": true },
-    "87654321": { "name": "Jane Smith", "admin": false }
+    "444490908321": { "name": "Test User", "admin": true }
 }

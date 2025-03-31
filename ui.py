@@ -5,8 +5,7 @@ from PIL import Image, ImageTk
 import subprocess
 from mfrc522 import SimpleMFRC522
 import RPi.GPIO as GPIO
-
-
+import threading
 from camera import get_mock_frame, take_mock_snapshot
 from storage import (
     log_access, load_users, load_config,
@@ -53,6 +52,41 @@ def reload_theme(root, frames, config):
             except:
                 pass
 
+def start_live_detection():
+    def reader_loop():
+        reader = SimpleMFRC522()
+        users = load_users()
+
+        while True:
+            try:
+                uid, _ = reader.read()
+                uid = str(uid)
+                user = users.get(uid)
+                name = user["name"] if user else "Unknown"
+                is_admin = user["admin"] if user else False
+
+                access_granted = uid in users
+                if is_blackout(load_config()) and not is_admin:
+                    access_granted = False
+                    status = "denied (blackout)"
+                else:
+                    status = "granted" if access_granted else "denied"
+
+                snapshot = take_mock_snapshot(uid, get_mock_frame())
+                log_access(uid, name, status, snapshot)
+
+                # Show result
+                message = f"UID: {uid}\nName: {name}\nAccess: {status}"
+                print(message)
+                messagebox.showinfo("Access Result", message)
+
+            except Exception as e:
+                print("RFID error:", e)
+            finally:
+                GPIO.cleanup()
+
+    thread = threading.Thread(target=reader_loop, daemon=True)
+    thread.start()
 
 def load_and_resize_image(path, size):
     img = Image.open(path)
@@ -444,7 +478,7 @@ def run_ui():
     blackout_tab = tk.Frame(admin_tabs, bg=theme["bg"])
     admin_tabs.add(blackout_tab, text="Blackout Schedule")
 
-    tk.Label(blackout_tab, text="🕒 Blackout Schedule", font=("Helvetica", 20),
+    tk.Label(blackout_tab, text="Blackout Schedule", font=("Helvetica", 20),
              bg=theme["bg"], fg=theme["fg"]).pack(pady=(10, 20))
 
     blackout_settings = config.get("blackout", {})
@@ -519,7 +553,7 @@ def run_ui():
     card_tab = tk.Frame(admin_tabs, bg=theme["bg"])
     admin_tabs.add(card_tab, text="Card Manager")
 
-    tk.Label(card_tab, text="🪪 Assign Card to User", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack(
+    tk.Label(card_tab, text="Assign Card to User", font=("Helvetica", 20), bg=theme["bg"], fg=theme["fg"]).pack(
         pady=10)
 
     last_uid = tk.StringVar(value="12345678")
@@ -557,5 +591,6 @@ def run_ui():
     back_btn.place(relx=1.0, rely=1.0, anchor="se", x=-20, y=-20)
 
     show_frame(home)
+    start_live_detection()
     root.mainloop()
 
