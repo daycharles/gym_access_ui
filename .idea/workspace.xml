@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: implement snapshot capture and live detection enhancements">
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: correct threading implementation for reader loop in UI module">
       <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -399,7 +399,31 @@
       <option name="project" value="LOCAL" />
       <updated>1743548749827</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="refactor: enhance UI by integrating camera functionality for improved snapshot capture">
+      <option name="closed" value="true" />
+      <created>1743549209260</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1743549209260</updated>
+    </task>
+    <task id="LOCAL-00039" summary="refactor: fix threading implementation for reader loop in UI module">
+      <option name="closed" value="true" />
+      <created>1743549272530</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1743549272530</updated>
+    </task>
+    <task id="LOCAL-00040" summary="refactor: correct threading implementation for reader loop in UI module">
+      <option name="closed" value="true" />
+      <created>1743549335489</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1743549335489</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -414,9 +438,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added more icons and theme settings" />
-    <MESSAGE value="updated workspace.xml" />
-    <MESSAGE value="made icons larger" />
     <MESSAGE value="added ability to minimize and maximize screen. Larger home icons" />
     <MESSAGE value="refactor: remove unused global variable and update workspace settings" />
     <MESSAGE value="refactor: update logo image size and adjust workspace settings" />
@@ -439,7 +460,10 @@
     <MESSAGE value="refactor: update snapshot capture implementation for improved live detection functionality" />
     <MESSAGE value="refactor: enhance live detection by integrating camera functionality with RFID scanning" />
     <MESSAGE value="refactor: implement snapshot capture and live detection enhancements" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: implement snapshot capture and live detection enhancements" />
+    <MESSAGE value="refactor: enhance UI by integrating camera functionality for improved snapshot capture" />
+    <MESSAGE value="refactor: fix threading implementation for reader loop in UI module" />
+    <MESSAGE value="refactor: correct threading implementation for reader loop in UI module" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: correct threading implementation for reader loop in UI module" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

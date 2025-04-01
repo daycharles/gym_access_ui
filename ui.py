@@ -41,6 +41,8 @@ def determine_theme(mode):
         return DAY_THEME if 7 <= hour < 19 else NIGHT_THEME
     return DAY_THEME
 
+def play_beep():
+    os.system('beep -f 1000 -l 200')
 
 def reload_theme(root, frames, config):
     global theme, theme_mode
@@ -104,6 +106,8 @@ def snapshot_and_log(uid):
     status = "granted" if uid in users else "denied"
     if is_blackout(config) and not users.get(uid, {}).get("admin", False):
         status = "denied (blackout)"
+
+    play_beef()
 
     ret, frame = camera.read()
     if ret:
