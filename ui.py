@@ -3,9 +3,11 @@ from tkinter import ttk, messagebox, simpledialog
 from datetime import datetime
 from PIL import Image, ImageTk
 import subprocess
+import cv2
+import os
 from mfrc522 import SimpleMFRC522
 import RPi.GPIO as GPIO
-import threading
+from threading import Thread
 from camera import get_mock_frame, take_mock_snapshot, take_snapshot
 from storage import (
     log_access, load_users, load_config,

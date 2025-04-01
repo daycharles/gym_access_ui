@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update snapshot capture implementation for improved live detection functionality">
-      <change beforePath="$PROJECT_DIR$/camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/camera.py" afterDir="false" />
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: implement snapshot capture and live detection enhancements">
       <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -392,7 +391,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743457956764</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="refactor: implement snapshot capture and live detection enhancements">
+      <option name="closed" value="true" />
+      <created>1743548749827</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1743548749827</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -407,8 +414,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added icons for UI" />
-    <MESSAGE value="workspace xml" />
     <MESSAGE value="added more icons and theme settings" />
     <MESSAGE value="updated workspace.xml" />
     <MESSAGE value="made icons larger" />
@@ -432,7 +437,9 @@
     <MESSAGE value="refactor: add snapshot capture functionality to enhance live detection features" />
     <MESSAGE value="refactor: implement snapshot capture functionality to improve live detection capabilities" />
     <MESSAGE value="refactor: update snapshot capture implementation for improved live detection functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update snapshot capture implementation for improved live detection functionality" />
+    <MESSAGE value="refactor: enhance live detection by integrating camera functionality with RFID scanning" />
+    <MESSAGE value="refactor: implement snapshot capture and live detection enhancements" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: implement snapshot capture and live detection enhancements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
