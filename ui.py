@@ -95,7 +95,7 @@ def start_live_detection():
             finally:
                 GPIO.cleanup()
 
-    thread = threading.Thread(target=reader_loop, daemon=True)
+    thread = Thread.Thread(target=reader_loop, daemon=True)
     thread.start()
 
 
