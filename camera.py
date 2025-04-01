@@ -21,3 +21,25 @@ def take_mock_snapshot(uid, frame):
     frame.save(path)
     return path
 
+def take_snapshot(uid="unknown"):
+    try:
+        cap = cv2.VideoCapture(0)
+        if not cap.isOpened():
+            raise RuntimeError("Camera could not be opened.")
+
+        ret, frame = cap.read()
+        cap.release()
+
+        if not ret:
+            raise RuntimeError("Failed to capture frame.")
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{uid}_{timestamp}.jpg"
+        path = os.path.join(SNAPSHOT_DIR, filename)
+
+        cv2.imwrite(path, frame)
+        return path
+    except Exception as e:
+        print(f"[Camera Error] {e}")
+        return None
+
