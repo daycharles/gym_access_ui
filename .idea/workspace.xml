@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update theme reloading and user detection logic for improved clarity and functionality">
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: improve frame processing in UI for enhanced video display and performance">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -440,7 +442,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743550268519</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="refactor: improve frame processing in UI for enhanced video display and performance">
+      <option name="closed" value="true" />
+      <created>1743550843972</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1743550843972</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -455,7 +465,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor: update logo image size and adjust workspace settings" />
     <MESSAGE value="refactor: update home screen label and adjust workspace settings" />
     <MESSAGE value="refactor: update home screen to display live feed and adjust icon references" />
     <MESSAGE value="refactor: update home screen layout and icon colors for improved visibility" />
@@ -480,7 +489,8 @@
     <MESSAGE value="refactor: correct threading implementation for reader loop in UI module" />
     <MESSAGE value="refactor: add beep functionality to UI for user feedback during operations" />
     <MESSAGE value="refactor: update theme reloading and user detection logic for improved clarity and functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update theme reloading and user detection logic for improved clarity and functionality" />
+    <MESSAGE value="refactor: improve frame processing in UI for enhanced video display and performance" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: improve frame processing in UI for enhanced video display and performance" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

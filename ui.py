@@ -25,7 +25,7 @@ NIGHT_THEME = {"bg": "#294856", "fg": "#ffffff", "accent": "#3a3a3a", "button": 
 theme_mode = None
 theme = {}
 is_minimized = False
-camera = cv2.VideoCapture(0)
+camera = None
 reader = SimpleMFRC522()
 users = load_users()
 config = load_config()
@@ -153,8 +153,9 @@ def make_label_button(parent, text, command, image=None):
     return lbl
 
 
-def run_ui():
-    global theme, theme_mode
+def run_ui(cam):
+    global theme, theme_mode, camera
+    camera = cam
     config = load_config()
     theme_mode = config.get("theme_mode", "system")
     theme = determine_theme(theme_mode)
@@ -172,14 +173,15 @@ def run_ui():
     scan_result.pack(pady=10)
 
     def update_frame():
-        ret, frame = camera.read()
-        if ret:
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            img = Image.fromarray(frame_rgb)
-            img = img.resize((800, 480), Image.LANCZOS)
-            imgtk = ImageTk.PhotoImage(image=img)
-            video_frame.imgtk = imgtk
-            video_frame.config(image=imgtk)
+        if camera is not None:
+            ret, frame = camera.read()
+            if ret:
+                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                img = Image.fromarray(frame_rgb)
+                img = img.resize((800, 480), Image.LANCZOS)
+                imgtk = ImageTk.PhotoImage(image=img)
+                video_frame.imgtk = imgtk
+                video_frame.config(image=imgtk)
 
         root.after(33, update_frame)
 
