@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: correct threading implementation for reader loop in UI module">
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: update theme reloading and user detection logic for improved clarity and functionality">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,14 +45,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cd104535/PycharmProjects/gym-access-ui&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/cd104535/PycharmProjects/gym-access-ui",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\cd104535\PycharmProjects\gym-access-ui\assets\icons" />
@@ -423,7 +424,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743549335489</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="refactor: add beep functionality to UI for user feedback during operations">
+      <option name="closed" value="true" />
+      <created>1743549495772</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1743549495772</updated>
+    </task>
+    <task id="LOCAL-00042" summary="refactor: update theme reloading and user detection logic for improved clarity and functionality">
+      <option name="closed" value="true" />
+      <created>1743550268519</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1743550268519</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -438,8 +455,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added ability to minimize and maximize screen. Larger home icons" />
-    <MESSAGE value="refactor: remove unused global variable and update workspace settings" />
     <MESSAGE value="refactor: update logo image size and adjust workspace settings" />
     <MESSAGE value="refactor: update home screen label and adjust workspace settings" />
     <MESSAGE value="refactor: update home screen to display live feed and adjust icon references" />
@@ -463,7 +478,9 @@
     <MESSAGE value="refactor: enhance UI by integrating camera functionality for improved snapshot capture" />
     <MESSAGE value="refactor: fix threading implementation for reader loop in UI module" />
     <MESSAGE value="refactor: correct threading implementation for reader loop in UI module" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: correct threading implementation for reader loop in UI module" />
+    <MESSAGE value="refactor: add beep functionality to UI for user feedback during operations" />
+    <MESSAGE value="refactor: update theme reloading and user detection logic for improved clarity and functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update theme reloading and user detection logic for improved clarity and functionality" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

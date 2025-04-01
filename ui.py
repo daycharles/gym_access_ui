@@ -172,17 +172,17 @@ def run_ui():
     scan_result.pack(pady=10)
 
     def update_frame():
-        ret, frames = camera.read()
+        ret, frame = camera.read()
         if ret:
-            frames = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            img = Image.fromarray(frames)
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            img = Image.fromarray(frame_rgb)
             img = img.resize((800, 480), Image.LANCZOS)
             imgtk = ImageTk.PhotoImage(image=img)
             video_frame.imgtk = imgtk
             video_frame.config(image=imgtk)
+
         root.after(33, update_frame)
 
-    Thread(target=rfid_listener, args=(scan_result,), daemon=True).start()
 
     # Load Icons
     icons = {
@@ -655,7 +655,11 @@ def run_ui():
     back_btn.place(relx=1.0, rely=1.0, anchor="se", x=-20, y=-20)
 
     show_frame(home)
+    print("[INFO] Starting GateWise UI")
     start_live_detection()
+    print("[INFO] RFID reader thread running")
+
     update_frame()
+    print("[INFO] Frame updated")  # You can throttle this for performance later
     root.mainloop()
 
