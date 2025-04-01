@@ -44,9 +44,9 @@ def determine_theme(mode):
 def play_beep():
     os.system('beep -f 1000 -l 200')
 
-def reload_theme(root, frames, config):
+def reload_theme(root, frames, configuration):
     global theme, theme_mode
-    theme_mode = config.get("theme_mode", "system")
+    theme_mode = configuration.get("theme_mode", "system")
     theme = determine_theme(theme_mode)
 
     # Apply to root
@@ -66,18 +66,18 @@ os.makedirs(SNAPSHOT_DIR, exist_ok=True)
 
 def start_live_detection():
     def reader_loop():
-        reader = SimpleMFRC522()
-        users = load_users()
+        detection_reader = SimpleMFRC522()
+        user = load_users()
 
         while True:
             try:
-                uid, _ = reader.read()
+                uid, _ = detection_reader.read()
                 uid = str(uid)
-                user = users.get(uid)
+                user = user.get(uid)
                 name = user["name"] if user else "Unknown"
                 is_admin = user["admin"] if user else False
 
-                access_granted = uid in users
+                access_granted = uid in user
                 if is_blackout(load_config()) and not is_admin:
                     access_granted = False
                     status = "denied (blackout)"
@@ -107,7 +107,7 @@ def snapshot_and_log(uid):
     if is_blackout(config) and not users.get(uid, {}).get("admin", False):
         status = "denied (blackout)"
 
-    play_beef()
+    play_beep()
 
     ret, frame = camera.read()
     if ret:
@@ -128,7 +128,7 @@ def rfid_listener(label):
             uid, _ = reader.read()
             name, status = snapshot_and_log(str(uid))
             label.config(text=f"Scanned UID: {uid}\nName: {name}\nStatus: {status}")
-        except Exception as e:
+        except Efpxception as e:
             label.config(text=f"RFID Error: {e}")
         finally:
             GPIO.cleanup()
