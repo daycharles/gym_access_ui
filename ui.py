@@ -5,6 +5,7 @@ from PIL import Image, ImageTk
 import subprocess
 import cv2
 import os
+from door_listener import start_server
 from mfrc522 import SimpleMFRC522
 import RPi.GPIO as GPIO
 from threading import Thread
@@ -30,6 +31,7 @@ reader = SimpleMFRC522()
 users = load_users()
 config = load_config()
 
+Thread(target=start_server, daemon=True).start()
 
 def determine_theme(mode):
     hour = datetime.now().hour
