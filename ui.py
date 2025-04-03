@@ -31,8 +31,6 @@ reader = SimpleMFRC522()
 users = load_users()
 config = load_config()
 
-Thread(target=start_server, daemon=True).start()
-
 def determine_theme(mode):
     hour = datetime.now().hour
     if mode == "day":
@@ -161,6 +159,7 @@ def run_ui(cam):
     config = load_config()
     theme_mode = config.get("theme_mode", "system")
     theme = determine_theme(theme_mode)
+    Thread(target=start_server, daemon=True).start()
 
     root = tk.Tk()
     root.title("GateWise Access Control")
