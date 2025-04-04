@@ -17,9 +17,13 @@ def save_config(config_obj):
 
 def is_blackout(config):
     now = datetime.now()
-    day = now.strftime("%A")
-    hour = now.hour
-    return hour in config.get("blackout", {}).get(day, [])
+    current_day = now.strftime("%a")[:3]  # e.g., "Mon"
+    current_hour = now.hour
+    day_blocks = config.get("blackout", {}).get(current_day, [])
+    for block in day_blocks:
+        if block["start"] <= current_hour < block["end"]:
+            return True
+    return False
 
 def log_access(uid, name, status, snapshot_path):
     entry = {

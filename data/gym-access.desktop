@@ -1,6 +1,0 @@
-gym-access.desktop[Desktop Entry]
-Type=Application
-Name=Gym Access Control
-Exec=python3 /home/dtfitness/gym-access-ui/gym-access-ui/main.py
-StartupNotify=false
-Terminal=false
