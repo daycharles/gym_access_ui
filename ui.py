@@ -99,19 +99,14 @@ def send_unlock_command(ip, port):
     except Exception as e:
         messagebox.showerror("Error", f"Failed to send unlock: {e}")
 
-def send_command_to_all_doors(command):
-    door_ips = [
-        ("192.168.1.101", 5051),
-        # ("192.168.1.102", 5052),
-        # ("192.168.1.103", 5053)
-    ]
-    for ip, port in door_ips:
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.connect((ip, port))
-                s.sendall(command.encode())
-        except Exception as e:
-            print(f"[ERROR] Failed to send to {ip}:{port} - {e}")
+def send_command_to_door(ip, command):
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect((ip, 5050))
+            s.sendall(command.encode())
+            print(f"[CMD] Sent '{command}' to {ip}")
+    except Exception as e:
+        print(f"[CMD] Error sending to {ip}:", e)
 
 
 def run_ui():
@@ -374,7 +369,7 @@ def run_ui():
         from tkinter import simpledialog
         entered_pin = simpledialog.askstring("PIN", "Enter Admin PIN:", show="*")
         if entered_pin == config.get("admin_pin"):
-            send_command_to_all_doors("UNLOCK")
+            send_command_to_door("192.168.0.42", "UNLOCK")
             messagebox.showinfo("Override", "All doors unlocked.")
         else:
             messagebox.showerror("Access Denied", "Incorrect PIN.")
@@ -383,7 +378,7 @@ def run_ui():
         from tkinter import simpledialog
         entered_pin = simpledialog.askstring("PIN", "Enter Admin PIN:", show="*")
         if entered_pin == config.get("admin_pin"):
-            send_command_to_all_doors("LOCK")
+            send_command_to_door("192.168.0.42","LOCK")
             messagebox.showinfo("Override", "All doors locked.")
         else:
             messagebox.showerror("Access Denied", "Incorrect PIN.")
