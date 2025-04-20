@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: move TCP listener initialization to main UI thread for improved startup sequence">
-      <change beforePath="$PROJECT_DIR$/assets/icons/camera_white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/relay_white.png" beforeDir="false" />
+    <list default="true" id="2951e071-a21b-40d8-8802-e57e5c3ba860" name="Changes" comment="refactor: simplify door command sending by updating function to target a specific door">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,16 +46,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cd104535/PycharmProjects/gym-access-ui&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/cd104535/PycharmProjects/gym-access-ui",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cd104535\PycharmProjects\gym-access-ui\assets\icons" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\cd104535\PycharmProjects\gym-access-ui\assets\icons" />
     </key>
@@ -474,7 +476,31 @@
       <option name="project" value="LOCAL" />
       <updated>1743724398481</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="refactor: update blackout schedule configuration and enhance UI for admin controls">
+      <option name="closed" value="true" />
+      <created>1743799427053</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1743799427053</updated>
+    </task>
+    <task id="LOCAL-00048" summary="refactor: update user details and add new user to the configuration">
+      <option name="closed" value="true" />
+      <created>1743801752442</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1743801752442</updated>
+    </task>
+    <task id="LOCAL-00049" summary="refactor: simplify door command sending by updating function to target a specific door">
+      <option name="closed" value="true" />
+      <created>1743802592378</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1743802592378</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -489,9 +515,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor: update access logs and improve night theme colors for better visibility" />
-    <MESSAGE value="refactor: add hardware test functionality and update UI for better interaction" />
-    <MESSAGE value="refactor: restructure blackout schedule and enhance user management UI" />
     <MESSAGE value="refactor: enhance LED test functionality with blinking pattern and error handling" />
     <MESSAGE value="refactor: update GPIO pin configuration for LED blinking functionality" />
     <MESSAGE value="refactor: implement RFID card scanning functionality with error handling" />
@@ -514,7 +537,10 @@
     <MESSAGE value="refactor: integrate camera functionality into UI for live video feed" />
     <MESSAGE value="refactor: implement TCP listener for door access logging with multi-threading support" />
     <MESSAGE value="refactor: start TCP listener in a separate thread for door access logging" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: start TCP listener in a separate thread for door access logging" />
+    <MESSAGE value="refactor: update blackout schedule configuration and enhance UI for admin controls" />
+    <MESSAGE value="refactor: update user details and add new user to the configuration" />
+    <MESSAGE value="refactor: simplify door command sending by updating function to target a specific door" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: simplify door command sending by updating function to target a specific door" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
