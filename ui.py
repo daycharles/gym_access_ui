@@ -58,19 +58,19 @@ def run_ui():
     root.attributes("-fullscreen", True)
     root.configure(bg=theme["bg"])
 
-    # PIN-pad for accessing settings
     def prompt_pin():
         pin = ""
         pad = tk.Toplevel(root)
         pad.title("Enter Admin PIN")
-        pad.geometry("350x500")
-        pad.bind("<Return>", lambda e: on_enter())
-        pad.transient(root)
-        pad.grab_set()
+        pad.geometry("300x500")
+        pad.transient(root)  # float above main window
+        pad.grab_set()  # make modal
+        pad.lift()  # ensure it’s on top
 
         display_var = tk.StringVar(value="")
         tk.Label(pad, textvariable=display_var, font=("Arial", 24),
-                 bg=theme["bg"], fg=theme["fg"]).pack(pady=20)
+                 bg=theme["bg"], fg=theme["fg"]) \
+            .pack(pady=20)
 
         def update_display():
             display_var.set("●" * len(pin))
@@ -91,7 +91,7 @@ def run_ui():
             pin = pin[:-1]
             update_display()
 
-        def on_enter():
+        def on_enter(event=None):
             if pin == config.get("admin_pin", ""):
                 pad.destroy()
                 show_frame("settings")
@@ -99,12 +99,15 @@ def run_ui():
                 messagebox.showerror("Denied", "Incorrect PIN")
                 on_clear()
 
+        # Numeric keypad
         btn_frame = tk.Frame(pad, bg=theme["bg"])
-        btn_frame.pack()
-        keys = [("1", 1), ("2", 2), ("3", 3),
-                ("4", 4), ("5", 5), ("6", 6),
-                ("7", 7), ("8", 8), ("9", 9),
-                ("←", "back"), ("0", 0), ("C", "clear")]
+        btn_frame.pack(expand=True)
+        keys = [
+            ("1", 1), ("2", 2), ("3", 3),
+            ("4", 4), ("5", 5), ("6", 6),
+            ("7", 7), ("8", 8), ("9", 9),
+            ("←", "back"), ("0", 0), ("C", "clear")
+        ]
         for idx, (txt, val) in enumerate(keys):
             cmd = (lambda v=val: on_back() if v == "back"
             else on_clear() if v == "clear"
@@ -113,10 +116,12 @@ def run_ui():
                       width=4, height=2, command=cmd) \
                 .grid(row=idx // 3, column=idx % 3, padx=5, pady=5)
 
-        tk.Button(pad, text="Enter", font=("Arial", 18),
-                  bg=theme["accent"], fg=theme["fg"],
-                  width=12, command=on_enter) \
-            .pack(pady=20)
+        # ENTER button
+        enter_btn = tk.Button(pad, text="Enter", font=("Arial", 18),
+                              bg=theme["accent"], fg=theme["fg"],
+                              width=12, command=on_enter)
+        enter_btn.pack(pady=10)
+        pad.bind("<Return>", on_enter)
 
         pad.wait_window()
 
